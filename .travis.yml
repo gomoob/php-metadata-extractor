@@ -9,7 +9,7 @@ php:
 addons:
   apt:
     packages:
-      - openjdk-8-jdk
+      - openjdk-7-jdk
 
 before_install:
   - curl -sL https://deb.nodesource.com/setup_6.x | sudo -E bash -
