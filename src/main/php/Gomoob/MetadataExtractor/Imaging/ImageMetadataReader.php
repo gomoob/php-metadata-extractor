@@ -16,6 +16,8 @@ use Gomoob\MetadataExtractor\Metadata\Jpeg\JpegDirectory;
 use Gomoob\MetadataExtractor\Metadata\Jfif\JfifDirectory;
 use Gomoob\MetadataExtractor\Metadata\Exif\ExifIFD0Directory;
 use Gomoob\MetadataExtractor\Metadata\Exif\ExifSubIFDDirectory;
+use Gomoob\MetadataExtractor\Metadata\Tag;
+use Gomoob\MetadataExtractor\Metadata\Jpeg\JpegComponent;
 
 /**
  * Reads metadata from any supported file format.
@@ -81,12 +83,130 @@ class ImageMetadataReader
                     $metadata->addDirectory($directory);
                 }
                 
-                
-                var_dump($line);
+                static::addTagToDirectory($directory, $line);
             }
         }
         
         return $metadata;
+    }
+    
+    private static function addTagToDirectory(Directory $directory, $tagLine)
+    {
+        $start = strpos($tagLine, '] ');
+        
+        if ($start === false) {
+            // TODO: Error
+        }
+        
+        $nameAndDescription = explode('=', substr($tagLine, $start + 2));
+        $nameAndDescription[0] = trim($nameAndDescription[0]);
+        $nameAndDescription[1] = trim($nameAndDescription[1]);
+        
+        if ($directory instanceof JfifDirectory) {
+            var_dump($tagLine);
+            var_dump($nameAndDescription[0]);
+            var_dump($nameAndDescription[1]);
+
+            switch ($nameAndDescription[0]) {
+                case 'Version':
+                    break;
+                case 'Resolution Units':
+                    break;
+                case 'Y Resolution':
+                    break;
+                case 'X Resolution':
+                    break;
+                case 'Thumbnail Width Pixels':
+                    break;
+                case 'Thumbnail Height Pixels':
+                    break;
+                default:
+                    // TODO: Exception
+            }
+        } elseif ($directory instanceof JpegDirectory) {
+            switch ($nameAndDescription[0]) {
+                case 'Compression Type':
+                    // TODO
+                    break;
+                case 'Data Precision':
+                    $directory->setInt(
+                        JpegDirectory::TAG_DATA_PRECISION,
+                        static::parseBitsString($nameAndDescription[1])
+                    );
+                    break;
+                case 'Image Width':
+                    $directory->setInt(
+                        JpegDirectory::TAG_IMAGE_WIDTH,
+                        static::parsePixelsString($nameAndDescription[1])
+                    );
+                    break;
+                case 'Image Height':
+                    $directory->setInt(
+                        JpegDirectory::TAG_IMAGE_HEIGHT,
+                        static::parsePixelsString($nameAndDescription[1])
+                    );
+                    break;
+                case 'Number of Components':
+                    $directory->setInt(JpegDirectory::TAG_NUMBER_OF_COMPONENTS, intval($nameAndDescription[1]));
+                    break;
+                case 'Component 1':
+                    $directory->setObject(
+                        JpegDirectory::TAG_COMPONENT_DATA_1,
+                        static::parseJpegComponentString($nameAndDescription[1])
+                    );
+                    break;
+                case 'Component 2':
+                    $directory->setObject(
+                        JpegDirectory::TAG_COMPONENT_DATA_2,
+                        static::parseJpegComponentString($nameAndDescription[1])
+                    );
+                    break;
+                case 'Component 3':
+                    $directory->setObject(
+                        JpegDirectory::TAG_COMPONENT_DATA_3,
+                        static::parseJpegComponentString($nameAndDescription[1])
+                    );
+                    break;
+                case 'Component 4':
+                    $directory->setObject(
+                        JpegDirectory::TAG_COMPONENT_DATA_4,
+                        static::parseJpegComponentString($nameAndDescription[1])
+                    );
+                    break;
+                default:
+                    // TODO: Exception
+            }
+        }
+    }
+    
+    private static function parseJpegComponentString($jpegComponentString)
+    {
+        // TODO
+        return new JpegComponent(0, 0, 0);
+    }
+
+    private static function parseBitsString($bitsString)
+    {
+        
+        $endPos = strpos($bitsString, ' bits');
+
+        if ($endPos === false) {
+            // TODO: Exception
+        }
+        
+        return substr($bitsString, 0, $endPos);
+    }
+    
+    private static function parsePixelsString($pixelsString)
+    {
+        
+        $endPos = strpos($pixelsString, ' pixels');
+        
+        if ($endPos === false) {
+            // TODO: Exception
+        }
+         
+        return substr($pixelsString, 0, $endPos);
     }
     
     private static function createDirectoryWithName($directoryName)

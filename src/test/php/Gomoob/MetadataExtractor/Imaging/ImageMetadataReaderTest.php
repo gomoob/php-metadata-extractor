@@ -32,7 +32,9 @@ class ImageMetadataReaderTest extends TestCase
         // Checks directory 'JPEG'
         $directory = $metadata->getDirectories()[0];
         $this->assertInstanceOf(JpegDirectory::class, $directory);
-        
+        $this->assertSame(7, $directory->getTagCount());
+        $this->assertCount(7, $directory->getTags());
+
         // Checks directory 'JFIF'
         $directory = $metadata->getDirectories()[1];
         $this->assertInstanceOf(JfifDirectory::class, $directory);

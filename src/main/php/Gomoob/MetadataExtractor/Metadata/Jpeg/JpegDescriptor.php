@@ -18,5 +18,14 @@ use Gomoob\MetadataExtractor\Metadata\TagDescriptor;
  */
 class JpegDescriptor extends TagDescriptor
 {
+    public function getDataPrecisionDescription()
+    {
+        $value = $this->directory.getString(TAG_DATA_PRECISION);
+        
+        if ($value === null) {
+            return null;
+        }
 
+        return $value . ' bits';
+    }
 }

@@ -31,7 +31,9 @@ abstract class Directory
      *
      * @var array
      */
-    private $definedTagList = [];
+    protected $definedTagList = [];
+    
+    protected $errorList = [];
     
     /**
      * The descriptor used to interpret tag values.
@@ -39,6 +41,26 @@ abstract class Directory
      * @var \Gomoob\MetadatExtractor\Metadata\TagDescriptor
      */
     protected $descriptor;
+    
+    /**
+     * Map of values hashed by type identifiers.
+     *
+     * @var array
+     */
+    protected $tagMap = [];
+
+    /**
+     * Provides a description of a tag's value using the descriptor set by <code>setDescriptor(Descriptor)</code>.
+     *
+     * @param int tagType the tag type identifier
+     * @return the tag value's description as a String
+     */
+    public function getDescription($tagType)
+    {
+        assert($this->descriptor !== null);
+        
+        return $this->descriptor.getDescription($tagType);
+    }
 
     /**
      * Provides the name of the directory, for display purposes.  E.g. <code>Exif</code>
@@ -48,6 +70,16 @@ abstract class Directory
     public function getName()
     {
         return $this->name;
+    }
+    
+    /**
+     * Returns the number of tags set in this Directory.
+     *
+     * @return int the number of tags set in this Directory
+     */
+    public function getTagCount()
+    {
+        return count($this->definedTagList);
     }
     
     /**
@@ -68,14 +100,27 @@ abstract class Directory
 
         return $nameMap[tagType];
     }
-    
+
     /**
-     * Provides the map of tag names, hashed by tag type identifier.
+     * Returns an Iterator of Tag instances that have been set in this Directory.
      *
-     * @return the map of tag names
+     * @return an Iterator of Tag instances
      */
-    abstract protected function getTagNameMap();
-    
+    public function getTags()
+    {
+        return $this->definedTagList;
+    }
+
+    /**
+     * Gets a value indicating whether the directory is empty, meaning it contains no errors and no tag values.
+     *
+     * @return boolean `true` if this directory is empty, `false` otherwise.
+     */
+    public function isEmpty()
+    {
+        return empty($this->errorList) && empty($this->definedTagList);
+    }
+
     /**
      * Sets the descriptor used to interpret tag values.
      *
@@ -89,4 +134,43 @@ abstract class Directory
 
         $this->descriptor = $descriptor;
     }
+    
+    /**
+     * Sets an <code>int</code> value for the specified tag.
+     *
+     * @param int tagType the tag's value as an int.
+     * @param int value the value for the specified tag as an int.
+     */
+    public function setInt($tagType, $value)
+    {
+        $this->setObject($tagType, $value);
+    }
+    
+    /**
+     * Sets a <code>Object</code> for the specified tag.
+     *
+     * @param int tagType the tag's value as an int.
+     * @param mixed value the value for the specified tag.
+     *
+     * @throws NullPointerException if value is <code>null</code>
+     */
+    public function setObject($tagType, $value)
+    {
+        if ($value == null) {
+            throw new NullPointerException('cannot set a null object');
+        }
+
+        if (!array_key_exists(intval($tagType), $this->tagMap)) {
+            $this->definedTagList[$tagType] = new Tag($tagType, $this);
+        }
+
+        $this->tagMap[$tagType] = $value;
+    }
+    
+    /**
+     * Provides the map of tag names, hashed by tag type identifier.
+     *
+     * @return the map of tag names
+     */
+    abstract protected function getTagNameMap();
 }
