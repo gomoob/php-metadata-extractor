@@ -18,13 +18,22 @@ namespace Gomoob\MetadataExtractor\Metadata;
  */
 class Metadata
 {
-    
     /**
      * The list of {@link Directory} instances in this container, in the order they were added.
      *
      * @var \Gomoob\MetadataExtractor\Metadata\Directory[]
      */
-    private $directories = [ ];
+    private $directories = [];
+    
+    /**
+     * Adds a directory to this metadata collection.
+     *
+     * @param \Gomoob\MetadataExtract directory the {@link Directory} to add into this metadata collection.
+     */
+    public function addDirectory(Directory $directory)
+    {
+        $this->directories[] = $directory;
+    }
     
     /**
      * Returns an iterable set of the {@link Directory} instances contained in this metadata collection.
