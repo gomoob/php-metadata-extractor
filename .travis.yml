@@ -6,6 +6,11 @@ php:
   - 7.1
   - hhvm
 
+addons:
+  apt:
+    packages:
+      - openjdk-8-jdk
+
 before_install:
   - curl -sL https://deb.nodesource.com/setup_6.x | sudo -E bash -
   - sudo apt-get install --yes nodejs
