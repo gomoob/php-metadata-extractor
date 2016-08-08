@@ -1,0 +1,7 @@
+/node_modules
+/vendor
+/target
+/_site/
+/Gemfile.lock
+/phpdocumentor/
+/build/
