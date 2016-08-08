@@ -3,7 +3,7 @@
 /**
  * Copyright 2016 SARL GOMOOB. All rights reserved.
  */
-namespace Gomoob\MetadataExtractor\Driver;
+namespace Gomoob\BinaryDriver;
 
 use Alchemy\BinaryDriver\AbstractBinary;
 
@@ -20,13 +20,12 @@ use Psr\Log\LoggerInterface;
  */
 class JavaDriver extends AbstractBinary
 {
-
     /**
      * {@inheritdoc}
      */
     public function getName()
     {
-        return 'metadata-extractor';
+        return 'java';
     }
 
     /**

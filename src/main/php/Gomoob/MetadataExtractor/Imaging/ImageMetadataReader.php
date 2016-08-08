@@ -8,6 +8,10 @@
 */
 namespace Gomoob\MetadataExtractor\Imaging;
 
+use Gomoob\MetadataExtractor\Driver\JavaDriver;
+use Gomoob\MetadataExtractor\Metadata\Metadata;
+use Gomoob\MetadataExtractor\Driver\MetadataExtractorDriver;
+
 /**
  * Reads metadata from any supported file format.
  *
@@ -35,9 +39,8 @@ namespace Gomoob\MetadataExtractor\Imaging;
  */
 class ImageMetadataReader
 {
-    
     /**
-     * The MetadataExtractor driver used to manage calls to the MetadataExtractor Java library.
+     * The {@link MetadataExtractorDriver} driver used to manage calls to the `metadata-extractor` library.
      *
      * @var \Gomoob\MetadataExtractor\Driver\MetadataExtractorDriver
      */
@@ -45,6 +48,14 @@ class ImageMetadataReader
 
     public static function readMetadata($file)
     {
-        return null;
+        $metadataExtractorDriver = MetadataExtractorDriver::create();
+        
+        $output = $metadataExtractorDriver->command(
+            [
+                $file
+            ]
+        );
+
+        return new Metadata();
     }
 }

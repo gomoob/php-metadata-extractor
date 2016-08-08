@@ -2,32 +2,27 @@
 
 /**
  * Copyright 2016 SARL GOMOOB. All rights reserved.
-*/
-namespace Gomoob\MetadataExtractor\Driver;
+ */
+namespace Gomoob\BinaryDriver;
+
+use Monolog\Logger;
 
 use PHPUnit\Framework\TestCase;
-use Monolog\Logger;
-use Monolog\Handler\StreamHandler;
 
 /**
- * Binary driver used to drive the 'java' executable.
+ * Test case used to test the {@link JavaDriver} class.
  *
  * @author Baptiste GAILLARD (baptiste.gaillard@gomoob.com)
  */
 class JavaDriverTest extends TestCase
 {
-    
     /**
      * Test method for `create($logger, $configuration)`.
      */
     public function testCreate()
     {
-        // Create a PSR logger (this is not mandatory but could be useful for testing purpose)
-        $logger = new Logger('name');
-        $logger->pushHandler(new StreamHandler('php://stdout'));
-
         // Calls the method to be tested
-        $javaDriver = JavaDriver::create($logger);
+        $javaDriver = JavaDriver::create();
         
         // Makes a simple call to ensure it works
         $output = $javaDriver->command(
