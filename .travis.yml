@@ -3,6 +3,7 @@ language: php
 php:
   - 5.6
   - 7.0
+  - 7.1
   - hhvm
 
 before_install:
@@ -20,4 +21,4 @@ script:
 after_script:
   - php vendor/bin/coveralls -v
   - chmod +x code-climate-test-reporter
-  - CODECLIMATE_REPO_TOKEN=fbbb8faf1226ee12fa1f4f6b838fb021e0fcfcb4c48a8be1906adedcc255a860 ./code-climate-test-reporter
+  - CODECLIMATE_REPO_TOKEN=iuxZEsKGmIXjOGObP1WiZ1VmOFybvyUs5 ./code-climate-test-reporter
