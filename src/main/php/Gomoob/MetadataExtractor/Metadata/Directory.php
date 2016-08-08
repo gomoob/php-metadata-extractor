@@ -156,11 +156,11 @@ abstract class Directory
      */
     public function setObject($tagType, $value)
     {
-        if ($value == null) {
+        if ($value === null) {
             throw new NullPointerException('cannot set a null object');
         }
 
-        if (!array_key_exists(intval($tagType), $this->tagMap)) {
+        if (!array_key_exists($tagType, $this->tagMap)) {
             $this->definedTagList[$tagType] = new Tag($tagType, $this);
         }
 

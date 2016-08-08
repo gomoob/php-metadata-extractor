@@ -38,10 +38,14 @@ class ImageMetadataReaderTest extends TestCase
         // Checks directory 'JFIF'
         $directory = $metadata->getDirectories()[1];
         $this->assertInstanceOf(JfifDirectory::class, $directory);
+        $this->assertSame(6, $directory->getTagCount());
+        $this->assertCount(6, $directory->getTags());
         
         // Checks directory 'Exif IFDO'
         $directory = $metadata->getDirectories()[2];
         $this->assertInstanceOf(ExifIFD0Directory::class, $directory);
+        $this->assertSame(3, $directory->getTagCount());
+        $this->assertCount(3, $directory->getTags());
         
         // Checks directory 'Exif SubIFD'
         $directory = $metadata->getDirectories()[3];

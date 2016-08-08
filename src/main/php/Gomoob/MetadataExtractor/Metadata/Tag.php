@@ -38,8 +38,10 @@ class Tag
      */
     public function __constrct($tagType, Directory $directory)
     {
-        $this->$tagType = $tagType;
-        $this->$directory = $directory;
+        var_dump($tagType);
+        
+        $this->tagType = $tagType;
+        $this->directory = $directory;
     }
     
     /**
@@ -60,7 +62,7 @@ class Tag
      */
     public function getTagName()
     {
-        return _directory.getTagName(_tagType);
+        return $this->_directory.getTagName($this->tagType);
     }
     
     /**

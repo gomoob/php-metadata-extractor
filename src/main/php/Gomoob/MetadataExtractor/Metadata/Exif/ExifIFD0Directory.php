@@ -15,9 +15,8 @@ use Gomoob\MetadataExtractor\Metadata\Directory;
  *
  * @author Baptiste GAILLARD (baptiste.gaillard@gomoob.com)
  */
-class ExifIFD0Directory extends Directory
+class ExifIFD0Directory extends ExifDirectoryBase
 {
-
     /**
      * This tag is a pointer to the Exif SubIFD.
      *

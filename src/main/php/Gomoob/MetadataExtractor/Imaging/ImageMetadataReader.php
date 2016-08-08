@@ -8,16 +8,17 @@
 */
 namespace Gomoob\MetadataExtractor\Imaging;
 
-use Gomoob\MetadataExtractor\Metadata\Metadata;
 use Gomoob\BinaryDriver\MetadataExtractorDriver;
+
+use Gomoob\MetadataExtractor\Metadata\Metadata;
+
 use Gomoob\MetadataExtractor\Metadata\Directory;
 use Gomoob\MetadataExtractor\Metadata\File\FileMetadataDirectory;
+use Gomoob\MetadataExtractor\Metadata\Jpeg\JpegComponent;
 use Gomoob\MetadataExtractor\Metadata\Jpeg\JpegDirectory;
 use Gomoob\MetadataExtractor\Metadata\Jfif\JfifDirectory;
 use Gomoob\MetadataExtractor\Metadata\Exif\ExifIFD0Directory;
 use Gomoob\MetadataExtractor\Metadata\Exif\ExifSubIFDDirectory;
-use Gomoob\MetadataExtractor\Metadata\Tag;
-use Gomoob\MetadataExtractor\Metadata\Jpeg\JpegComponent;
 
 /**
  * Reads metadata from any supported file format.
@@ -102,23 +103,51 @@ class ImageMetadataReader
         $nameAndDescription[0] = trim($nameAndDescription[0]);
         $nameAndDescription[1] = trim($nameAndDescription[1]);
         
-        if ($directory instanceof JfifDirectory) {
+        if ($directory instanceof ExifIFD0Directory) {
             var_dump($tagLine);
             var_dump($nameAndDescription[0]);
             var_dump($nameAndDescription[1]);
-
+            switch ($nameAndDescription[1]) {
+                case '':
+                    break;
+            }
+        } elseif ($directory instanceof JfifDirectory) {
             switch ($nameAndDescription[0]) {
                 case 'Version':
+                    if ($nameAndDescription[1] === '1.1') {
+                        $directory->setInt(JfifDirectory::TAG_VERSION, 0x0101);
+                    } elseif ($nameAndDescription[1] === '1.2') {
+                        $directory->setInt(JfifDirectory::TAG_VERSION, 0x0102);
+                    } else {
+                        // TODO: Version inconnue
+                    }
                     break;
                 case 'Resolution Units':
+                    switch ($nameAndDescription[1]) {
+                        case 'none':
+                            $directory->setInt(JfifDirectory::TAG_UNITS, 0);
+                            break;
+                        case 'inch':
+                            $directory->setInt(JfifDirectory::TAG_UNITS, 1);
+                            break;
+                        case 'centimetre':
+                            $directory->setInt(JfifDirectory::TAG_UNITS, 2);
+                            break;
+                        default:
+                            $directory->setInt(JfifDirectory::TAG_UNITS, -1);
+                    }
                     break;
                 case 'Y Resolution':
+                    $directory->setInt(JfifDirectory::TAG_RESY, static::parseDotsString($nameAndDescription[1]));
                     break;
                 case 'X Resolution':
+                    $directory->setInt(JfifDirectory::TAG_RESX, static::parseDotsString($nameAndDescription[1]));
                     break;
                 case 'Thumbnail Width Pixels':
+                    $directory->setInt(JfifDirectory::TAG_THUMB_WIDTH, $nameAndDescription[1]);
                     break;
                 case 'Thumbnail Height Pixels':
+                    $directory->setInt(JfifDirectory::TAG_THUMB_HEIGHT, $nameAndDescription[1]);
                     break;
                 default:
                     // TODO: Exception
@@ -195,6 +224,17 @@ class ImageMetadataReader
         }
         
         return substr($bitsString, 0, $endPos);
+    }
+    
+    private static function parseDotsString($dotsString)
+    {
+        $endPos = strpos($dotsString, ' dot');
+    
+        if ($endPos === false) {
+            // TODO: Exception
+        }
+    
+        return substr($dotsString, 0, $endPos);
     }
     
     private static function parsePixelsString($pixelsString)
