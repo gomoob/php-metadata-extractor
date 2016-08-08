@@ -19,6 +19,9 @@ use Gomoob\MetadataExtractor\Metadata\Jpeg\JpegDirectory;
 use Gomoob\MetadataExtractor\Metadata\Jfif\JfifDirectory;
 use Gomoob\MetadataExtractor\Metadata\Exif\ExifIFD0Directory;
 use Gomoob\MetadataExtractor\Metadata\Exif\ExifSubIFDDirectory;
+use Gomoob\MetadataExtractor\Metadata\Exif\ExifThumbnailDirectory;
+use Gomoob\MetadataExtractor\Metadata\Xmp\XmpDirectory;
+use Gomoob\MetadataExtractor\Metadata\Icc\IccDirectory;
 
 /**
  * Reads metadata from any supported file format.
@@ -108,8 +111,308 @@ class ImageMetadataReader
             var_dump($nameAndDescription[0]);
             var_dump($nameAndDescription[1]);
             switch ($nameAndDescription[1]) {
-                case '':
+                case 'Interoperability Index':
                     break;
+                case 'Interoperability Version':
+                    break;
+                case 'New Subfile Type':
+                    break;
+                case 'Subfile Type':
+                    break;
+                case 'Image Width':
+                    break;
+                case 'Image Height':
+                    break;
+                case 'Bits Per Sample':
+                    break;
+                case 'Compression':
+                    break;
+                case 'Photometric Interpretation':
+                    break;
+                case 'Thresholding':
+                    break;
+                case 'Fill Order':
+                    break;
+                case 'Document Name':
+                    break;
+                case 'Image Description':
+                    break;
+                case 'Make':
+                    break;
+                case 'Model':
+                    break;
+                case 'Strip Offsets':
+                    break;
+                case 'Orientation':
+                    break;
+                case 'Samples Per Pixel':
+                    break;
+                case 'Rows Per Strip':
+                    break;
+                case 'Strip Byte Counts':
+                    break;
+                case 'Minimum Sample Value':
+                    break;
+                case 'Maximum Sample Value':
+                    break;
+                case 'X Resolution':
+                    break;
+                case 'Y Resolution':
+                    break;
+                case 'Planar Configuration':
+                    break;
+                case 'Page Name':
+                    break;
+                case 'Resolution Unit':
+                    break;
+                case 'Transfer Function':
+                    break;
+                case 'Software':
+                    break;
+                case 'Date/Time':
+                    break;
+                case 'Artist':
+                    break;
+                case 'Predictor':
+                    break;
+                case 'Host Computer':
+                    break;
+                case 'White Point':
+                    break;
+                case 'Primary Chromaticities':
+                    break;
+                case 'Tile Width':
+                    break;
+                case 'Tile Length':
+                    break;
+                case 'Tile Offsets':
+                    break;
+                case 'Tile Byte Counts':
+                    break;
+                case 'Sub IFD Pointer(s)':
+                    break;
+                case 'Transfer Range':
+                    break;
+                case 'JPEG Tables':
+                    break;
+                case 'JPEG Proc':
+                    break;
+                case 'YCbCr Coefficients':
+                    break;
+                case 'YCbCr Sub-Sampling':
+                    break;
+                case 'YCbCr Positioning':
+                    break;
+                case 'Reference Black/White':
+                    break;
+                case 'Strip Row Counts':
+                    break;
+                case 'Application Notes':
+                    break;
+                case 'Related Image File Format':
+                    break;
+                case 'Related Image Width':
+                    break;
+                case 'Related Image Height':
+                    break;
+                case 'Rating':
+                    break;
+                case 'CFA Repeat Pattern Dim':
+                    break;
+                case 'CFA Pattern':
+                    break;
+                case 'Battery Level':
+                    break;
+                case 'Copyright':
+                    break;
+                case 'Exposure Time':
+                    break;
+                case 'F-Number':
+                    break;
+                case 'IPTC/NAA':
+                    break;
+                case 'Inter Color Profile':
+                    break;
+                case 'Exposure Program':
+                    break;
+                case 'Spectral Sensitivity':
+                    break;
+                case 'ISO Speed Ratings':
+                    break;
+                case 'Opto-electric Conversion Function (OECF)':
+                    break;
+                case 'Interlace':
+                    break;
+                case 'Time Zone Offset':
+                    break;
+                case 'Self Timer Mode':
+                    break;
+                case 'Sensitivity Type':
+                    break;
+                case 'Standard Output Sensitivity':
+                    break;
+                case 'Recommended Exposure Index':
+                    break;
+                case 'Time Zone Offset':
+                    break;
+                case 'Self Timer Mode':
+                    break;
+                case 'Exif Version':
+                    break;
+                case 'Date/Time Original':
+                    break;
+                case 'Date/Time Digitized':
+                    break;
+                case 'Components Configuration':
+                    break;
+                case 'Compressed Bits Per Pixel':
+                    break;
+                case 'Shutter Speed Value':
+                    break;
+                case 'Aperture Value':
+                    break;
+                case 'Brightness Value':
+                    break;
+                case 'Exposure Bias Value':
+                    break;
+                case 'Max Aperture Value':
+                    break;
+                case 'Subject Distance':
+                    break;
+                case 'Metering Mode':
+                    break;
+                case 'White Balance':
+                    break;
+                case 'Flash':
+                    break;
+                case 'Focal Length':
+                    break;
+                case 'Flash Energy':
+                    break;
+                case 'Spatial Frequency Response':
+                    break;
+                case 'Noise':
+                    break;
+                case 'Focal Plane X Resolution':
+                    break;
+                case 'Focal Plane Y Resolution':
+                    break;
+                case 'Image Number':
+                    break;
+                case 'Security Classification':
+                    break;
+                case 'Image History':
+                    break;
+                case 'Subject Location':
+                    break;
+                case 'Exposure Index':
+                    break;
+                case 'TIFF/EP Standard ID':
+                    break;
+                case 'Makernote':
+                    break;
+                case 'User Comment':
+                    break;
+                case 'Sub-Sec Time':
+                    break;
+                case 'Sub-Sec Time Original':
+                    break;
+                case 'Sub-Sec Time Digitized':
+                    break;
+                case 'Windows XP Title':
+                    break;
+                case 'Windows XP Comment':
+                    break;
+                case 'Windows XP Author':
+                    break;
+                case 'Windows XP Keywords':
+                    break;
+                case 'Windows XP Subject':
+                    break;
+                case 'FlashPix Version':
+                    break;
+                case 'Color Space':
+                    break;
+                case 'Exif Image Width':
+                    break;
+                case 'Exif Image Height':
+                    break;
+                case 'Related Sound File':
+                    break;
+                case 'Flash Energy':
+                    break;
+                case 'Spatial Frequency Response':
+                    break;
+                case 'Focal Plane X Resolution':
+                    break;
+                case 'Focal Plane Y Resolution':
+                    break;
+                case 'Focal Plane Resolution Unit':
+                    break;
+                case 'Subject Location':
+                    break;
+                case 'Exposure Index':
+                    break;
+                case 'Sensing Method':
+                    break;
+                case 'File Source':
+                    break;
+                case 'Scene Type':
+                    break;
+                case 'CFA Pattern':
+                    break;
+                case 'Custom Rendered':
+                    break;
+                case 'Exposure Mode':
+                    break;
+                case 'White Balance Mode':
+                    break;
+                case 'Digital Zoom Ratio':
+                    break;
+                case 'Focal Length 35':
+                    break;
+                case 'Scene Capture Type':
+                    break;
+                case 'Gain Control':
+                    break;
+                case 'Contrast':
+                    break;
+                case 'Saturation':
+                    break;
+                case 'Sharpness':
+                    break;
+                case 'Device Setting Description':
+                    break;
+                case 'Subject Distance Range':
+                    break;
+                case 'Unique Image ID':
+                    break;
+                case 'Camera Owner Name':
+                    break;
+                case 'Body Serial Number':
+                    break;
+                case 'Lens Specification':
+                    break;
+                case 'Lens Make':
+                    break;
+                case 'Lens Model':
+                    break;
+                case 'Lens Serial Number':
+                    break;
+                case 'Gamma':
+                    break;
+                case 'Print IM':
+                    break;
+                case 'Panasonic Title':
+                    break;
+                case 'Panasonic Title (2)':
+                    break;
+                case 'Padding':
+                    break;
+                case 'Lens':
+                    break;
+                default:
+                    // TODO: Error
             }
         } elseif ($directory instanceof JfifDirectory) {
             switch ($nameAndDescription[0]) {
@@ -262,14 +565,23 @@ class ImageMetadataReader
             case 'Exif SubIFD':
                 $directory = new ExifSubIFDDirectory();
                 break;
+            case 'Exif Thumbnail':
+                $directory = new ExifThumbnailDirectory();
+                break;
             case 'File':
                 $directory = new FileMetadataDirectory();
+                break;
+            case 'ICC Profile':
+                $directory = new IccDirectory();
                 break;
             case 'JFIF':
                 $directory = new JfifDirectory();
                 break;
             case 'JPEG':
                 $directory = new JpegDirectory();
+                break;
+            case 'XMP':
+                $directory = new XmpDirectory();
                 break;
             default:
                 throw new \RuntimeException('Unknown directory name \'' . $directoryName . '\' !');
