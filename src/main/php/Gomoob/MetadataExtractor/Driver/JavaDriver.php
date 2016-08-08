@@ -18,49 +18,41 @@ use Psr\Log\LoggerInterface;
  *
  * @author Baptiste GAILLARD (baptiste.gaillard@gomoob.com)
  */
-class JavaDriver extends AbstractBinary {
+class JavaDriver extends AbstractBinary
+{
 
-	/**
-	 * {@inheritdoc}
-	 */
-	public function getName()
-	{
-		return 'metadata-extractor';
-	}
+    /**
+     * {@inheritdoc}
+     */
+    public function getName()
+    {
+        return 'metadata-extractor';
+    }
 
-	/**
-	 * Creates a driver instance.
-	 *
-	 * @param LoggerInterface     $logger
-	 * @param array|Configuration $configuration
-	 *
-	 * @return \Gomoob\MediaInfo\Driver\MediaInfoDriver the created MediaInfoDriver instance.
-	 */
-	public static function create(LoggerInterface $logger = null, $configuration = [])
-	{
-		if (!$configuration instanceof ConfigurationInterface) {
+    /**
+     * Creates a driver instance.
+     *
+     * @param LoggerInterface     $logger
+     * @param array|Configuration $configuration
+     *
+     * @return \Gomoob\MediaInfo\Driver\MediaInfoDriver the created MediaInfoDriver instance.
+     */
+    public static function create(LoggerInterface $logger = null, $configuration = [])
+    {
+        if (!$configuration instanceof ConfigurationInterface) {
+            $configuration = new Configuration($configuration);
+        }
 
-			$configuration = new Configuration($configuration);
+        $binaries = $configuration->get('java', ['java']);
 
-		}
+        if (!$configuration->has('timeout')) {
+            $configuration->set('timeout', 300);
+        }
 
-		$binaries = $configuration->get('java', ['java']);
-
-		if (!$configuration->has('timeout')) {
-
-			$configuration->set('timeout', 300);
-
-		}
-
-		try {
-
-			return static::load($binaries, $logger, $configuration);
-
-		} catch (BinaryDriverExecutableNotFound $e) {
-
-			throw new ExecutableNotFoundException('Unable to load java', $e->getCode(), $e);
-
-		}
-
-	}
+        try {
+            return static::load($binaries, $logger, $configuration);
+        } catch (BinaryDriverExecutableNotFound $e) {
+            throw new ExecutableNotFoundException('Unable to load java', $e->getCode(), $e);
+        }
+    }
 }

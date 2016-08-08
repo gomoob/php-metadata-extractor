@@ -10,8 +10,8 @@ namespace Gomoob\MetadataExtractor\Imaging;
 
 /**
  * Reads metadata from any supported file format.
- * 
- * This class a lightweight wrapper around other, specific metadata processors. During extraction, the file type is 
+ *
+ * This class a lightweight wrapper around other, specific metadata processors. During extraction, the file type is
  * determined from the first few bytes of the file. Parsing is then delegated to one of:
  *
  * * {@link JpegMetadataReader} for JPEG files
@@ -24,26 +24,27 @@ namespace Gomoob\MetadataExtractor\Imaging;
  * * {@link PcxMetadataReader} for PCX files
  * * {@link WebpMetadataReader} for WebP files
  * * {@link RafMetadataReader} for RAF files
- * 
- * If you know the file type you're working with, you may use one of the above processors directly. For most scenarios 
+ *
+ * If you know the file type you're working with, you may use one of the above processors directly. For most scenarios
  * it is simpler, more convenient and more robust to use this class.
- * 
- * {@link FileTypeDetector} is used to determine the provided image's file type, and therefore the appropriate metadata 
+ *
+ * {@link FileTypeDetector} is used to determine the provided image's file type, and therefore the appropriate metadata
  * reader to use.
  *
  * @author Baptiste GAILLARD (baptiste.gaillard@gomoob.com)
  */
-class ImageMetadataReader {
-	
-	/**
-	 * The MetadataExtractor driver used to manage calls to the MetadataExtractor Java library.
-	 *
-	 * @var \Gomoob\MetadataExtractor\Driver\MetadataExtractorDriver
-	 */
-	private $metadataExtractorDriver;
+class ImageMetadataReader
+{
+    
+    /**
+     * The MetadataExtractor driver used to manage calls to the MetadataExtractor Java library.
+     *
+     * @var \Gomoob\MetadataExtractor\Driver\MetadataExtractorDriver
+     */
+    private $metadataExtractorDriver;
 
-	public static function readMetadata($file) {
-		return null;
-	}
-	
+    public static function readMetadata($file)
+    {
+        return null;
+    }
 }
