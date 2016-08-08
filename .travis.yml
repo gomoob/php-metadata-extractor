@@ -6,12 +6,8 @@ php:
   - 7.1
   - hhvm
 
-addons:
-  apt:
-    packages:
-      - openjdk-7-jdk
-
 before_install:
+  - sudo apt-get install --yes openjdk-7-jdk
   - curl -sL https://deb.nodesource.com/setup_6.x | sudo -E bash -
   - sudo apt-get install --yes nodejs
   - npm install -g grunt-cli

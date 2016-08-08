@@ -6,6 +6,11 @@
 namespace Gomoob\MetadataExtractor\Imaging;
 
 use PHPUnit\Framework\TestCase;
+use Gomoob\MetadataExtractor\Metadata\Jpeg\JpegDirectory;
+use Gomoob\MetadataExtractor\Metadata\Jfif\JfifDirectory;
+use Gomoob\MetadataExtractor\Metadata\Exif\ExifIFD0Directory;
+use Gomoob\MetadataExtractor\Metadata\Exif\ExifSubIFDDirectory;
+use Gomoob\MetadataExtractor\Metadata\File\FileMetadataDirectory;
 
 /**
  * Test case used to test the {@link ImageMetadataReader} class.
@@ -15,51 +20,33 @@ use PHPUnit\Framework\TestCase;
 class ImageMetadataReaderTest extends TestCase
 {
     /**
-     * Test method for {@link ImageMetadataReader#readMetadata($file)}.
+     * Test method for {@link ImageMetadataReader#readMetadata($file)} and `elephant.jpg`.
      */
-    public function testReadMetadata()
+    public function testReadMetadataWithElephantJpg()
     {
-        
         $metadata = ImageMetadataReader::readMetadata(realpath(TEST_RESOURCES_DIRECTORY . '/elephant.jpg'));
         
         // Checks number of parsed directories
         $this->assertCount(5, $metadata->getDirectories());
         
-        // Checks name of directories
-        $jpegDirectory = null;
-        $jfifDirectory = null;
-        $exifIfd0Directory = null;
-        $exifSubIfdDirectory = null;
-        $fileDirectory = null;
-        
-        foreach ($metadata->getDirectories() as $directory) {
-            switch ($directory->getName()) {
-                case 'JPEG':
-                    $jpegDirectory = $directory;
-                    break;
-                case 'JFIF':
-                    $jfifDirectory = $directory;
-                    break;
-                case 'Exif IFD0':
-                    $exifIfd0Directory = $directory;
-                    break;
-                case 'Exif SubIFD':
-                    $exifIfd0Directory = $directory;
-                    break;
-                case 'File':
-                    $fileDirectory = $directory;
-                    break;
-                default:
-                    $this->fail('Directory name \'' . $directory->getName() . '\' is no expected !');
-            }
-        }
-        
         // Checks directory 'JPEG'
+        $directory = $metadata->getDirectories()[0];
+        $this->assertInstanceOf(JpegDirectory::class, $directory);
         
         // Checks directory 'JFIF'
+        $directory = $metadata->getDirectories()[1];
+        $this->assertInstanceOf(JfifDirectory::class, $directory);
         
         // Checks directory 'Exif IFDO'
+        $directory = $metadata->getDirectories()[2];
+        $this->assertInstanceOf(ExifIFD0Directory::class, $directory);
+        
+        // Checks directory 'Exif SubIFD'
+        $directory = $metadata->getDirectories()[3];
+        $this->assertInstanceOf(ExifSubIFDDirectory::class, $directory);
         
         // Checks directory 'File'
+        $directory = $metadata->getDirectories()[4];
+        $this->assertInstanceOf(FileMetadataDirectory::class, $directory);
     }
 }
