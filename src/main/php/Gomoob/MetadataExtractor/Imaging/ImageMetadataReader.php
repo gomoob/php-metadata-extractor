@@ -26,6 +26,10 @@ use Gomoob\MetadataExtractor\Metadata\Photoshop\PhotoshopDirectory;
 use Gomoob\MetadataExtractor\Metadata\Iptc\IptcDirectory;
 use Gomoob\MetadataExtractor\Metadata\Adobe\AdobeJpegDirectory;
 use Gomoob\MetadataExtractor\Metadata\Jpeg\JpegCommentDirectory;
+use Gomoob\MetadataExtractor\Metadata\Exif\Makernotes\NikonType1MakernoteDirectory;
+use Gomoob\MetadataExtractor\Metadata\Exif\ExifInteropDirectory;
+use Gomoob\MetadataExtractor\Metadata\Exif\Makernotes\CanonMakernoteDirectory;
+use Gomoob\MetadataExtractor\Metadata\Exif\GpsDirectory;
 
 /**
  * Reads metadata from any supported file format.
@@ -88,6 +92,13 @@ class ImageMetadataReader
                 // Otherwise create and configure a new directory
                 if (!$directory) {
                     $directory = static::createDirectoryWithName($directoryName);
+                    
+                    // TODO: Ignore unsupported directory names, this should disappear in the futur when all diretories
+                    //       are implemented
+                    if (!$directory) {
+                        continue;
+                    }
+                    
                     $metadata->addDirectory($directory);
                 }
                 
@@ -566,6 +577,9 @@ class ImageMetadataReader
             case 'Adobe JPEG':
                 $directory = new AdobeJpegDirectory();
                 break;
+            case 'Canon Makernote':
+                $directory = new CanonMakernoteDirectory();
+                break;
             case 'Exif IFD0':
                 $directory = new ExifIFD0Directory();
                 break;
@@ -578,8 +592,14 @@ class ImageMetadataReader
             case 'File':
                 $directory = new FileMetadataDirectory();
                 break;
+            case 'GPS':
+                $directory = new GpsDirectory();
+                break;
             case 'ICC Profile':
                 $directory = new IccDirectory();
+                break;
+            case 'Interoperability':
+                $directory = new ExifInteropDirectory();
                 break;
             case 'IPTC':
                 $directory = new IptcDirectory();
@@ -593,6 +613,9 @@ class ImageMetadataReader
             case 'JpegComment':
                 $directory = new JpegCommentDirectory();
                 break;
+            case 'Nikon Makernote':
+                $directory = new NikonType1MakernoteDirectory();
+                break;
             case 'Photoshop':
                 $directory = new PhotoshopDirectory();
                 break;
@@ -600,7 +623,8 @@ class ImageMetadataReader
                 $directory = new XmpDirectory();
                 break;
             default:
-                throw new \RuntimeException('Unknown directory name \'' . $directoryName . '\' !');
+                // TODO: To be enabled in testing
+                // throw new \RuntimeException('Unknown directory name \'' . $directoryName . '\' !');
         }
 
         return $directory;

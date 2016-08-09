@@ -28,6 +28,10 @@ class JavaDriverTest extends TestCase
         // Calls the method to be tested
         $javaDriver = JavaDriver::create($logger);
         
+        // TODO: To be deleted
+        $output = $javaDriver->command(['-version']);
+        var_dump($output);
+
         // Makes a simple call to ensure it works
         $output = $javaDriver->command(
             [

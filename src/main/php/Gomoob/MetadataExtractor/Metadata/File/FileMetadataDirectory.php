@@ -17,7 +17,6 @@ use Gomoob\MetadataExtractor\Metadata\Directory;
  */
 class FileMetadataDirectory extends Directory
 {
-    
     const TAG_FILE_NAME = 1;
     const TAG_FILE_SIZE = 2;
     const TAG_FILE_MODIFIED_DATE = 3;

@@ -97,4 +97,124 @@ class ImageMetadataReaderTest extends TestCase
     
         // TODO: Continue testing
     }
+    
+    /**
+     * Test method for {@link ImageMetadataReader#readMetadata($file)} and `data/nikonMakernoteType1.jpg`.
+     */
+    public function testReadMetadataWithNikonMakernoteType1Jpg()
+    {
+        $metadata = ImageMetadataReader::readMetadata(
+            realpath(TEST_RESOURCES_DIRECTORY . '/data/nikonMakernoteType1.jpg')
+        );
+    
+        // TODO: Continue testing
+    }
+    
+    /**
+     * Test method for {@link ImageMetadataReader#readMetadata($file)} and `data/nikonMakernoteType2b.jpg`.
+     */
+    public function testReadMetadataWithNikonMakernoteType2bJpg()
+    {
+        $metadata = ImageMetadataReader::readMetadata(
+            realpath(TEST_RESOURCES_DIRECTORY . '/data/nikonMakernoteType2b.jpg')
+        );
+    
+        // TODO: Continue testing
+    }
+    
+    /**
+     * Test method for {@link ImageMetadataReader#readMetadata($file)} and `data/noExif.jpg`.
+     */
+    public function testReadMetadataWithNoExifJpg()
+    {
+        $metadata = ImageMetadataReader::readMetadata(realpath(TEST_RESOURCES_DIRECTORY . '/data/noExif.jpg'));
+    
+        // TODO: Continue testing
+    }
+    
+    /**
+     * Test method for {@link ImageMetadataReader#readMetadata($file)} and `data/simple.jpg`.
+     */
+    public function testReadMetadataWithSimpleJpg()
+    {
+        $metadata = ImageMetadataReader::readMetadata(realpath(TEST_RESOURCES_DIRECTORY . '/data/simple.jpg'));
+    
+        // TODO: Continue testing
+    }
+    
+    /**
+     * Test method for {@link ImageMetadataReader#readMetadata($file)} and `data/windowsXpFields.jpg`.
+     */
+    public function testReadMetadataWithWindowsXpFieldsJpg()
+    {
+        $metadata = ImageMetadataReader::readMetadata(realpath(TEST_RESOURCES_DIRECTORY . '/data/windowsXpFields.jpg'));
+    
+        // TODO: Continue testing
+    }
+    
+    /**
+     * Test method for {@link ImageMetadataReader#readMetadata($file)} and `data/withExif.jpg`.
+     */
+    public function testReadMetadataWithWithExifJpg()
+    {
+        $metadata = ImageMetadataReader::readMetadata(realpath(TEST_RESOURCES_DIRECTORY . '/data/withExif.jpg'));
+    
+        // TODO: Continue testing
+    }
+    
+    /**
+     * Test method for {@link ImageMetadataReader#readMetadata($file)} and `data/withExifAndIptc.jpg`.
+     */
+    public function testReadMetadataWithWithExifAndIptcJpg()
+    {
+        $metadata = ImageMetadataReader::readMetadata(realpath(TEST_RESOURCES_DIRECTORY . '/data/withExifAndIptc.jpg'));
+    
+        // TODO: Continue testing
+    }
+
+    /**
+     * Test method for {@link ImageMetadataReader#readMetadata($file)} and `data/withIptc.jpg`.
+     */
+    public function testReadMetadataWithWithIptcJpg()
+    {
+        $metadata = ImageMetadataReader::readMetadata(realpath(TEST_RESOURCES_DIRECTORY . '/data/withIptc.jpg'));
+    
+        // TODO: Continue testing
+    }
+    
+    /**
+     * Test method for {@link ImageMetadataReader#readMetadata($file)} and `data/withIptcExifGps.jpg`.
+     */
+    public function testReadMetadataWithWithIptcExifGpsJpg()
+    {
+        $metadata = ImageMetadataReader::readMetadata(realpath(TEST_RESOURCES_DIRECTORY . '/data/withIptcExifGps.jpg'));
+    
+        // TODO: Continue testing
+    }
+    
+    /**
+     * Test method for {@link ImageMetadataReader#readMetadata($file)} and `data/withIptcPhotoshop6.jpg`.
+     */
+    public function testReadMetadataWithWithIptcPhotoshop6Jpg()
+    {
+        $metadata = ImageMetadataReader::readMetadata(
+            realpath(TEST_RESOURCES_DIRECTORY . '/data/withIptcPhotoshop6.jpg')
+        );
+
+        // TODO: Continue testing
+    }
+
+    /**
+     * Test method for {@link ImageMetadataReader#readMetadata($file)} and `data/withPanasonicFaces.jpg`.
+     */
+    public function testReadMetadataWithPanasonicFacesJpg()
+    {
+        /*
+    	$metadata = ImageMetadataReader::readMetadata(
+    	    realpath(TEST_RESOURCES_DIRECTORY . '/data/withPanasonicFaces.jpg')
+    	);
+    	*/
+
+        // TODO: Continue testing
+    }
 }
