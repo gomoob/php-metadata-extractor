@@ -16,6 +16,7 @@ use Gomoob\MetadataExtractor\Metadata\File\FileMetadataDirectory;
  * Test case used to test the {@link ImageMetadataReader} class.
  *
  * @author Baptiste GAILLARD (baptiste.gaillard@gomoob.com)
+ * @group ImageMetadataReaderTest
  */
 class ImageMetadataReaderTest extends TestCase
 {
