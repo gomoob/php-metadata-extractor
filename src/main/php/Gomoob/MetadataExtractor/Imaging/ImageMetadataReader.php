@@ -91,6 +91,8 @@ class ImageMetadataReader
                 
                 // Otherwise create and configure a new directory
                 if (!$directory) {
+                    var_dump($directoryName);
+                    
                     $directory = static::createDirectoryWithName($directoryName);
                     
                     // TODO: Ignore unsupported directory names, this should disappear in the futur when all diretories
@@ -122,9 +124,10 @@ class ImageMetadataReader
         $nameAndDescription[1] = trim($nameAndDescription[1]);
         
         if ($directory instanceof ExifIFD0Directory) {
-            var_dump($tagLine);
-            var_dump($nameAndDescription[0]);
-            var_dump($nameAndDescription[1]);
+            // var_dump($tagLine);
+            // var_dump($nameAndDescription[0]);
+            // var_dump($nameAndDescription[1]);
+            
             switch ($nameAndDescription[1]) {
                 case 'Interoperability Index':
                     break;

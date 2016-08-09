@@ -98,7 +98,7 @@ abstract class Directory
             return 'Unknown tag (0x' . $hex . ')';
         }
 
-        return $nameMap[tagType];
+        return $nameMap[$tagType];
     }
 
     /**
