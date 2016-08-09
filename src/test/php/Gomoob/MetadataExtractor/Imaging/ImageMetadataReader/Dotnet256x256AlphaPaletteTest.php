@@ -21,7 +21,7 @@ use Gomoob\MetadataExtractor\Metadata\File\FileMetadataDirectory;
 class Dotnet256x256AlphaPaletteTest extends TestCase
 {
     /**
-     * Test method for {@link ImageMetadataReader#readMetadata($file)} and `data/Nikon E990.jpg`.
+     * Test method for {@link ImageMetadataReader#readMetadata($file)} and `data/dotnet-256x256-alpha-palette.png`.
      */
     public function testReadMetadata()
     {
@@ -37,16 +37,9 @@ class Dotnet256x256AlphaPaletteTest extends TestCase
         $this->assertInstanceOf(PngDirectory::class, $directory);
         $this->assertSame('PNG-IHDR', $directory->getName());
 
-        /*
-		$rational = $directory->getRational(ExifIFD0Directory::TAG_X_RESOLUTION);
-		$this->assertSame(300, $rational->getNumerator());
-		$this->assertSame(1, $rational->getDenominator());
+        $this->assertSame(256, $directory->getInt(PngDirectory::TAG_IMAGE_WIDTH));
+        $this->assertSame(256, $directory->getInt(PngDirectory::TAG_IMAGE_HEIGHT));
 
-		$rational = $directory->getRational(ExifIFD0Directory::TAG_Y_RESOLUTION);
-		$this->assertSame(300, $rational->getNumerator());
-		$this->assertSame(1, $rational->getDenominator());
-        */
-        
         // Checks 'PNG-sRGB' directory
         $directory = $metadata->getDirectories()[1];
         $this->assertInstanceOf(PngDirectory::class, $directory);

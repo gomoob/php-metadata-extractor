@@ -2,10 +2,10 @@
 
 /**
  * gomoob/php-metadata-extractor
-*
-* @copyright Copyright (c) 2016, GOMOOB SARL (http://gomoob.com)
-* @license   http://www.opensource.org/licenses/mit-license.php MIT (see the LICENSE.md file)
-*/
+ *
+ * @copyright Copyright (c) 2016, GOMOOB SARL (http://gomoob.com)
+ * @license   http://www.opensource.org/licenses/mit-license.php MIT (see the LICENSE.md file)
+ */
 namespace Gomoob\MetadataExtractor\Imaging;
 
 use Gomoob\BinaryDriver\MetadataExtractorDriver;
@@ -32,6 +32,7 @@ use Gomoob\MetadataExtractor\Metadata\Exif\Makernotes\CanonMakernoteDirectory;
 use Gomoob\MetadataExtractor\Metadata\Exif\GpsDirectory;
 use Gomoob\MetadataExtractor\Lang\Rational;
 use Gomoob\MetadataExtractor\Metadata\Png\PngDirectory;
+use Gomoob\MetadataExtractor\Metadata\Gif\GifHeaderDirectory;
 
 /**
  * Reads metadata from any supported file format.
@@ -61,25 +62,44 @@ use Gomoob\MetadataExtractor\Metadata\Png\PngDirectory;
 class ImageMetadataReader
 {
     /**
+     * The last console output, this property is only defined for the PHP version of the library. The PHP version of
+     * the library parses the console output of the Java `metadata-extractor` library, ths variable contains the last
+     * console output.
+     *
+     * @var string
+     */
+    private static $lastOutput;
+
+    /**
      * The {@link MetadataExtractorDriver} driver used to manage calls to the `metadata-extractor` library.
      *
      * @var \Gomoob\MetadataExtractor\Driver\MetadataExtractorDriver
      */
     private $metadataExtractorDriver;
 
+    /**
+     * Gets the last console output.
+     *
+     * @return string the last console output.
+     */
+    public static function getLastOutput()
+    {
+        return static::$lastOutput;
+    }
+
     public static function readMetadata($file)
     {
         $metadata = new Metadata();
         
         $metadataExtractorDriver = MetadataExtractorDriver::create();
-        $output = $metadataExtractorDriver->command(
+        static::$lastOutput = $metadataExtractorDriver->command(
             [
                 $file
             ]
         );
         
         // Parse each line of the output
-        foreach (explode(PHP_EOL, $output) as $line) {
+        foreach (explode(PHP_EOL, static::$lastOutput) as $line) {
             $trimedLine = trim($line);
             
             // We ignore empty lines, metadata-extractor outputs empty line to have a human readable console output but
@@ -438,6 +458,30 @@ class ImageMetadataReader
                 default:
                     // TODO: Error
             }
+        } elseif ($directory instanceof GifHeaderDirectory) {
+            switch ($nameAndDescription[0]) {
+                case 'GIF Format Version':
+                    break;
+                case 'Image Height':
+                    $directory->setInt(GifHeaderDirectory::TAG_IMAGE_HEIGHT, intval($nameAndDescription[1]));
+                    break;
+                case 'Image Width':
+                    $directory->setInt(GifHeaderDirectory::TAG_IMAGE_WIDTH, intval($nameAndDescription[1]));
+                    break;
+                case 'Color Table Size':
+                    break;
+                case 'Is Color Table Sorted':
+                    break;
+                case 'Bits per Pixel':
+                    break;
+                case 'Has Global Color Table':
+                    break;
+                case 'Background Color Index':
+                    break;
+                case 'Pixel Aspect Ratio':
+                    break;
+                default:
+            }
         } elseif ($directory instanceof JfifDirectory) {
             switch ($nameAndDescription[0]) {
                 case 'Version':
@@ -533,9 +577,52 @@ class ImageMetadataReader
                     // TODO: Exception
             }
         } elseif ($directory instanceof PngDirectory) {
-            // var_dump($tagLine);
-            // var_dump($nameAndDescription[0]);
-            // var_dump($nameAndDescription[1]);
+//             var_dump($tagLine);
+//             var_dump($nameAndDescription);
+            switch ($nameAndDescription[0]) {
+                case 'Image Height':
+                    $directory->setInt(PngDirectory::TAG_IMAGE_HEIGHT, intval($nameAndDescription[1]));
+                    break;
+                case 'Image Width':
+                    $directory->setInt(PngDirectory::TAG_IMAGE_WIDTH, intval($nameAndDescription[1]));
+                    break;
+                case 'Bits Per Sample':
+                    break;
+                case 'Color Type':
+                    break;
+                case 'Compression Type':
+                    break;
+                case 'Filter Method':
+                    break;
+                case 'Interlace Method':
+                    break;
+                case 'Palette Size':
+                    break;
+                case 'Palette Has Transparency':
+                    break;
+                case 'sRGB Rendering Intent':
+                    break;
+                case 'Image Gamma':
+                    break;
+                case 'ICC Profile Name':
+                    break;
+                case 'Textual Data':
+                    break;
+                case 'Last Modification Time':
+                    break;
+                case 'Background Color':
+                    break;
+                case 'Pixels Per Unit X':
+                    break;
+                case 'Pixels Per Unit Y':
+                    break;
+                case 'Unit Specifier':
+                    break;
+                case 'Significant Bits':
+                    break;
+                default:
+                    break;
+            }
         }
     }
     
@@ -604,6 +691,9 @@ class ImageMetadataReader
                 break;
             case 'File':
                 $directory = new FileMetadataDirectory();
+                break;
+            case 'GIF Header':
+                $directory = new GifHeaderDirectory();
                 break;
             case 'GPS':
                 $directory = new GpsDirectory();

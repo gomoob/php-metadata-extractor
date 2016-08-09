@@ -24,6 +24,31 @@ Metadata metadata = ImageMetadataReader.readMetadata(imagePath);
 
 ## Installation
 
+The easiest way to install the library is to use [composer](https://getcomposer.org/ "composer") and define the 
+following dependency inside your `composer.json` file :
+
+```json
+{
+    "require": {
+        "gomoob/php-metadata-extractor": "~2.9"
+    }
+}
+```
+
+Please also note that because the library is a wrapper around a Java library the `java` executable must be available
+in your `PATH` variable.
+
+## Versioning
+
+To easier version identification the version of `php-metadata-extractor` will always be aligned with the version
+of the Java `metadata-extractor`. 
+
+Stable versions of `php-metadata-extrator` will be equal to `X.Y.Z-N` where `N` represents a patch number 
+associated to `php-metadata-extractor`. 
+
+Unstable or uncomplete versions of `php-metadata-extractor` will be equal to `X.Y.Z-alpha.N` or 
+`X.Y.Z-beta.N`. 
+
 ## About Gomoob
 
 At [Gomoob](https://www.gomoob.com "Gomoob") we build high quality software with awesome Open Source frameworks 

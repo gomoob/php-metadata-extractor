@@ -62,6 +62,81 @@ abstract class Directory
         
         return $this->descriptor.getDescription($tagType);
     }
+    
+    /**
+     * Returns the specified tag's value as an int, if possible.  Every attempt to represent the tag's value as an int
+     * is taken.
+     *
+     * Here is a list of the action taken depending upon the tag's original type:
+     *  * int - Return unchanged.
+     *  * Number - Return an int value (real numbers are truncated).
+     *  * Rational - Truncate any fractional part and returns remaining int.
+     *  * String - Attempt to parse string as an int.  If this fails, convert the char[] to an int (using shifts and
+     *    OR).
+     *  * Rational[] - Return int value of first item in array.
+     *  * byte[] - Return int value of first item in array.
+     *  * int[] - Return int value of first item in array.
+     *
+     * @throws MetadataException if no value exists for tagType or if it cannot be converted to an int.
+     */
+    public function getInt($tagType)
+    {
+        $integer = $this->getInteger($tagType);
+        
+        if ($integer !== null) {
+            return $integer;
+        }
+    
+        $o = $this->getObject($tagType);
+        
+        if ($o === null) {
+            throw new MetadataException(
+                "Tag '" . $this->getTagName($tagType) . "' has not been set -- check using containsTag() first"
+            );
+        }
+        
+        throw new MetadataException(
+            "Tag '" . $tagType . "' cannot be converted to int.  It is of type '" . $o->getClass() . "'."
+        );
+    }
+    
+    /**
+     * Returns the specified tag's value as an Integer, if possible.  Every attempt to represent the tag's value as an
+     * Integer is taken.
+     *
+     * Here is a list of the action taken depending upon the tag's original type:
+     *  * int - Return unchanged
+     *  * Number - Return an int value (real numbers are truncated)
+     *  * Rational - Truncate any fractional part and returns remaining int
+     *  * String - Attempt to parse string as an int.  If this fails, convert the char[] to an int (using shifts and OR)
+     *  * Rational[] - Return int value of first item in array if length &gt; 0
+     *  * byte[] - Return int value of first item in array if length &gt; 0
+     *  * int[] - Return int value of first item in array if length &gt; 0
+     *
+     * If the value is not found or cannot be converted to int, <code>null</code> is returned.
+     */
+    public function getInteger($tagType)
+    {
+        // FIXME: This method has to be reviewed
+
+        $o = $this->getObject($tagType);
+
+        if ($o === null) {
+            return null;
+        }
+    
+        if (is_int($o)) {
+            return $o;
+        } elseif (is_string($o)) {
+            return intval($o);
+        } elseif (is_array($o)) {
+            if (count($o) === 1) {
+                return intval($o[0]);
+            }
+        }
+        
+        return null;
+    }
 
     /**
      * Provides the name of the directory, for display purposes.  E.g. <code>Exif</code>
