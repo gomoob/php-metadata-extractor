@@ -2,7 +2,7 @@
 
 /**
  * Copyright 2016 SARL GOMOOB. All rights reserved.
-*/
+ */
 namespace Gomoob\MetadataExtractor\Imaging;
 
 use PHPUnit\Framework\TestCase;

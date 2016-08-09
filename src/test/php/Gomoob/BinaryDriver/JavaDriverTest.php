@@ -9,6 +9,7 @@ use Monolog\Logger;
 
 use PHPUnit\Framework\TestCase;
 use Monolog\Handler\StreamHandler;
+use Alchemy\BinaryDriver\Exception\ExecutionFailureException;
 
 /**
  * Test case used to test the {@link JavaDriver} class.
@@ -37,17 +38,25 @@ class JavaDriverTest extends TestCase
         });
 
         // Makes a simple call to ensure it works
-        $output = $javaDriver->command(
-            [
-                '-classpath',
-                str_replace('\\', '/', MAIN_RESOURCES_DIRECTORY . '/jars/*'),
-                'com.drew.imaging.ImageMetadataReader',
-                realpath(TEST_RESOURCES_DIRECTORY . '/elephant.jpg')
-            ]
-        );
-        
-        var_dump($output);
-
+        try {
+            $output = $javaDriver->command(
+                [
+                    '-classpath',
+                    str_replace('\\', '/', MAIN_RESOURCES_DIRECTORY . '/jars/*'),
+                    'com.drew.imaging.ImageMetadataReader',
+                    realpath(TEST_RESOURCES_DIRECTORY . '/elephant.jpg')
+                ]
+            );
+            
+            var_dump($output);
+        } catch (ExecutionFailureException $efex) {
+            $curEx = $efex;
+            
+            while ($curEx) {
+                var_dump($curEx->getMessage());
+                $curEx = $efex->getPrevious();
+            }
+        }
         $this->assertContains('[JPEG] Compression Type = Baseline', $output);
         $this->assertContains('[JPEG] Data Precision = 8 bits', $output);
         $this->assertContains('[JPEG] Image Height = 1280 pixels', $output);
