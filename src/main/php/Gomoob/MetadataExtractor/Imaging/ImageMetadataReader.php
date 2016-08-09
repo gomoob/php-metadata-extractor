@@ -22,6 +22,9 @@ use Gomoob\MetadataExtractor\Metadata\Exif\ExifSubIFDDirectory;
 use Gomoob\MetadataExtractor\Metadata\Exif\ExifThumbnailDirectory;
 use Gomoob\MetadataExtractor\Metadata\Xmp\XmpDirectory;
 use Gomoob\MetadataExtractor\Metadata\Icc\IccDirectory;
+use Gomoob\MetadataExtractor\Metadata\Photoshop\PhotoshopDirectory;
+use Gomoob\MetadataExtractor\Metadata\Iptc\IptcDirectory;
+use Gomoob\MetadataExtractor\Metadata\Adobe\AdobeJpegDirectory;
 
 /**
  * Reads metadata from any supported file format.
@@ -559,6 +562,9 @@ class ImageMetadataReader
          
         // Creates the right kind of directory depending on the name
         switch ($directoryName) {
+            case 'Adobe JPEG':
+                $directory = new AdobeJpegDirectory();
+                break;
             case 'Exif IFD0':
                 $directory = new ExifIFD0Directory();
                 break;
@@ -574,11 +580,17 @@ class ImageMetadataReader
             case 'ICC Profile':
                 $directory = new IccDirectory();
                 break;
+            case 'IPTC':
+                $directory = new IptcDirectory();
+                break;
             case 'JFIF':
                 $directory = new JfifDirectory();
                 break;
             case 'JPEG':
                 $directory = new JpegDirectory();
+                break;
+            case 'Photoshop':
+                $directory = new PhotoshopDirectory();
                 break;
             case 'XMP':
                 $directory = new XmpDirectory();
