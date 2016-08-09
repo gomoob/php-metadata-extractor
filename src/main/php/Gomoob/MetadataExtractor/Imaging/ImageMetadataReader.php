@@ -25,6 +25,7 @@ use Gomoob\MetadataExtractor\Metadata\Icc\IccDirectory;
 use Gomoob\MetadataExtractor\Metadata\Photoshop\PhotoshopDirectory;
 use Gomoob\MetadataExtractor\Metadata\Iptc\IptcDirectory;
 use Gomoob\MetadataExtractor\Metadata\Adobe\AdobeJpegDirectory;
+use Gomoob\MetadataExtractor\Metadata\Jpeg\JpegCommentDirectory;
 
 /**
  * Reads metadata from any supported file format.
@@ -588,6 +589,9 @@ class ImageMetadataReader
                 break;
             case 'JPEG':
                 $directory = new JpegDirectory();
+                break;
+            case 'JpegComment':
+                $directory = new JpegCommentDirectory();
                 break;
             case 'Photoshop':
                 $directory = new PhotoshopDirectory();

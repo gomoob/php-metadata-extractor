@@ -8,6 +8,7 @@ namespace Gomoob\BinaryDriver;
 use Monolog\Logger;
 
 use PHPUnit\Framework\TestCase;
+use Monolog\Handler\StreamHandler;
 
 /**
  * Test case used to test the {@link JavaDriver} class.
@@ -21,8 +22,11 @@ class JavaDriverTest extends TestCase
      */
     public function testCreate()
     {
+        $logger = new Logger('JavaDriver');
+        $logger->pushHandler(new StreamHandler('php://output'));
+        
         // Calls the method to be tested
-        $javaDriver = JavaDriver::create();
+        $javaDriver = JavaDriver::create($logger);
         
         // Makes a simple call to ensure it works
         $output = $javaDriver->command(
@@ -33,6 +37,8 @@ class JavaDriverTest extends TestCase
                 realpath(TEST_RESOURCES_DIRECTORY . '/elephant.jpg')
             ]
         );
+        
+        var_dump($output);
 
         $this->assertContains('[JPEG] Compression Type = Baseline', $output);
         $this->assertContains('[JPEG] Data Precision = 8 bits', $output);

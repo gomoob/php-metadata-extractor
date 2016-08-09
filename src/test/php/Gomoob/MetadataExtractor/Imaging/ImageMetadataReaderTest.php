@@ -30,6 +30,16 @@ class ImageMetadataReaderTest extends TestCase
     }
     
     /**
+     * Test method for {@link ImageMetadataReader#readMetadata($file)} and `data/crash01.jpg`.
+     */
+    public function testReadMetadataWithCrash01Jpg()
+    {
+        $metadata = ImageMetadataReader::readMetadata(realpath(TEST_RESOURCES_DIRECTORY . '/data/crash01.jpg'));
+    
+        // TODO: Continue testing
+    }
+    
+    /**
      * Test method for {@link ImageMetadataReader#readMetadata($file)} and `elephant.jpg`.
      */
     public function testReadMetadataWithElephantJpg()
@@ -74,5 +84,17 @@ class ImageMetadataReaderTest extends TestCase
         $this->assertInstanceOf(FileMetadataDirectory::class, $directory);
         
         // TODO: Check tags
+    }
+    
+    /**
+     * Test method for {@link ImageMetadataReader#readMetadata($file)} and `data/manuallyAddedThumbnail.jpg`.
+     */
+    public function testReadMetadataWithManuallyAddedThumbnailJpg()
+    {
+        $metadata = ImageMetadataReader::readMetadata(
+            realpath(TEST_RESOURCES_DIRECTORY . '/data/manuallyAddedThumbnail.jpg')
+        );
+    
+        // TODO: Continue testing
     }
 }

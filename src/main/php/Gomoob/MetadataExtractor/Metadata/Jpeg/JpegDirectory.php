@@ -17,7 +17,6 @@ use Gomoob\MetadataExtractor\Metadata\Directory;
  */
 class JpegDirectory extends Directory
 {
-    
     const TAG_COMPRESSION_TYPE = -3;
 
     /**
