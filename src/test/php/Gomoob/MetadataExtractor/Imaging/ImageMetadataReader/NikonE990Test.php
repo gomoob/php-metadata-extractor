@@ -28,8 +28,8 @@ class NikonE990Test extends TestCase
         // Checks 'Exif IFD0' directory
         $directory = $metadata->getDirectories()[0];
 
-        // $tag = $directory->getTagName(ExifIFD0Directory::TAG_X_RESOLUTION);
-        // var_dump($tag);
+        $tag = $directory->getTagName(ExifIFD0Directory::TAG_X_RESOLUTION);
+        var_dump($tag);
         
         // TODO: Continue testing
     }

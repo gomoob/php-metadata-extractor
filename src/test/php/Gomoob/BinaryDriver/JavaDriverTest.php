@@ -10,6 +10,7 @@ use Monolog\Logger;
 use PHPUnit\Framework\TestCase;
 use Monolog\Handler\StreamHandler;
 use Alchemy\BinaryDriver\Exception\ExecutionFailureException;
+use Alchemy\BinaryDriver\Listeners\DebugListener;
 
 /**
  * Test case used to test the {@link JavaDriver} class.
@@ -26,18 +27,19 @@ class JavaDriverTest extends TestCase
         $logger = new Logger('JavaDriver');
         $logger->pushHandler(new StreamHandler('php://output'));
         
+        $listener = new DebugListener();
+
         // Calls the method to be tested
         $javaDriver = JavaDriver::create($logger);
+        $javaDriver->listen($listener);
         
-        $javaDriver->on('error', function ($line) {
-            echo '[ERROR] ' . $line . PHP_EOL;
+        $javaDriver->on('debug', function ($line) {
+            echo $line;
         });
         
         // TODO: To be deleted
         $output = $javaDriver->command(['-version']);
         var_dump($output);
-        
-        
 
         // Makes a simple call to ensure it works
         try {

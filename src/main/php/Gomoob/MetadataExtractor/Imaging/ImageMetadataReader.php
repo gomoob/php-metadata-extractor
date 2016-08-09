@@ -30,6 +30,7 @@ use Gomoob\MetadataExtractor\Metadata\Exif\Makernotes\NikonType1MakernoteDirecto
 use Gomoob\MetadataExtractor\Metadata\Exif\ExifInteropDirectory;
 use Gomoob\MetadataExtractor\Metadata\Exif\Makernotes\CanonMakernoteDirectory;
 use Gomoob\MetadataExtractor\Metadata\Exif\GpsDirectory;
+use Gomoob\MetadataExtractor\Lang\Rational;
 
 /**
  * Reads metadata from any supported file format.
@@ -174,8 +175,16 @@ class ImageMetadataReader
                 case 'Maximum Sample Value':
                     break;
                 case 'X Resolution':
+                    $directory->setRational(
+                        ExifIFD0Directory::TAG_X_RESOLUTION,
+                        new Rational(static::parseDotsString($nameAndDescription[1]), 1)
+                    );
                     break;
                 case 'Y Resolution':
+                    $directory->setRational(
+                        ExifIFD0Directory::TAG_X_RESOLUTION,
+                        new Rational(static::parseDotsString($nameAndDescription[1]), 1)
+                    );
                     break;
                 case 'Planar Configuration':
                     break;
