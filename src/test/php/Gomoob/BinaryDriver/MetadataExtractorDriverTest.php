@@ -55,14 +55,26 @@ class MetadataExtractorDriverTest extends TestCase
         $this->assertContains('[Exif IFD0] Model = Canon EOS 70D', $output);
         $this->assertContains('[Exif IFD0] Exposure Time = 1/250 sec', $output);
         $this->assertContains('[Exif SubIFD] Exposure Time = 1/250 sec', $output);
-        $this->assertContains('[Exif SubIFD] F-Number = f/8,0', $output);
+        
+        // Under Windows and with French local floating numbers use ',' but under Unix its '.'
+        $this->assertTrue(
+            strstr($output, '[Exif SubIFD] F-Number = f/8,0') !== false  ||
+            strstr($output, '[Exif SubIFD] F-Number = f/8.0') !== false
+        );
+        
         $this->assertContains('[Exif SubIFD] ISO Speed Ratings = null', $output);
         $this->assertContains('[Exif SubIFD] Date/Time Original = 2016:07:17 10:35:28', $output);
         $this->assertContains('[Exif SubIFD] Flash = null', $output);
         $this->assertContains('[Exif SubIFD] Focal Length = 51 mm', $output);
         $this->assertContains('[Exif SubIFD] Lens Model = EF-S17-55mm f/2.8 IS USM', $output);
         $this->assertContains('[File] File Name = elephant.jpg', $output);
-        $this->assertContains('[File] File Size = 830001 bytes', $output);
+        
+        // Under Windows the number of bytes computed is not the same as Unix
+        $this->assertTrue(
+            strstr($output, '[File] File Size = 829992 bytes') !== false  ||
+            strstr($output, '[File] File Size = 830001 bytes') !== false
+        );
+        
         $this->assertContains('[File] File Modified Date = ', $output);
     }
     

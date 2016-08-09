@@ -51,6 +51,18 @@ abstract class Directory
     protected $tagMap = [];
 
     /**
+     * Indicates whether the specified tag type has been set.
+     *
+     * @param int tagType the tag type to check for.
+     *
+     * @return boolean true if a value exists for the specified tag type, false if not.
+     */
+    public function containsTag($tagType)
+    {
+        return array_key_exists(intval($tagType), $this->tagMap);
+    }
+
+    /**
      * Provides a description of a tag's value using the descriptor set by <code>setDescriptor(Descriptor)</code>.
      *
      * @param int tagType the tag type identifier

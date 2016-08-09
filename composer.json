@@ -1,7 +1,7 @@
 {
 	"name" : "gomoob/php-metadata-extractor",
 	"description" : "PHP wrapper to easily call the Java metadata-extrator library.",
-	"version" : "2.9.1-alpha.1",
+	"version" : "2.9.1-alpha.2",
 	"license" : "MIT",
 	"type" : "library",
 	"keywords" : [
