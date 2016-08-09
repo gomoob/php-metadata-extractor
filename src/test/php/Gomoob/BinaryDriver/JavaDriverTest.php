@@ -29,13 +29,15 @@ class JavaDriverTest extends TestCase
         // Calls the method to be tested
         $javaDriver = JavaDriver::create($logger);
         
+        $javaDriver->on('error', function ($line) {
+            echo '[ERROR] ' . $line . PHP_EOL;
+        });
+        
         // TODO: To be deleted
         $output = $javaDriver->command(['-version']);
         var_dump($output);
         
-        $javaDriver->on('error', function ($line) {
-            echo '[ERROR] ' . $line . PHP_EOL;
-        });
+        
 
         // Makes a simple call to ensure it works
         try {

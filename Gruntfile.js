@@ -48,7 +48,7 @@ module.exports = function(grunt) {
                 options: {
                 	bin : 'vendor/bin/phpunit',
                     configuration : 'phpunit.xml.dist',
-                    group : 'NikonE990Test'
+                    // group : 'NikonE990Test'
                 }
 
             }, /* PHPUnit Task */
