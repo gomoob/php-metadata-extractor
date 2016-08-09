@@ -88,7 +88,10 @@ class JavaDriverTest extends TestCase
         $this->assertContains('[Exif IFD0] Model = Canon EOS 70D', $output);
         $this->assertContains('[Exif IFD0] Exposure Time = 1/250 sec', $output);
         $this->assertContains('[Exif SubIFD] Exposure Time = 1/250 sec', $output);
-        $this->assertContains('[Exif SubIFD] F-Number = f/8,0', $output);
+        $this->assertTrue(
+            strstr($output, '[Exif SubIFD] F-Number = f/8,0') !== false  ||
+            strstr($output, '[Exif SubIFD] F-Number = f/8.0') !== false
+        );
         $this->assertContains('[Exif SubIFD] ISO Speed Ratings = null', $output);
         $this->assertContains('[Exif SubIFD] Date/Time Original = 2016:07:17 10:35:28', $output);
         $this->assertContains('[Exif SubIFD] Flash = null', $output);

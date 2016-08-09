@@ -31,6 +31,8 @@ use Gomoob\MetadataExtractor\Metadata\Exif\ExifInteropDirectory;
 use Gomoob\MetadataExtractor\Metadata\Exif\Makernotes\CanonMakernoteDirectory;
 use Gomoob\MetadataExtractor\Metadata\Exif\GpsDirectory;
 use Gomoob\MetadataExtractor\Lang\Rational;
+use Gomoob\MetadataExtractor\Metadata\Png\PngDirectory;
+use Gomoob\MetadataExtractor\Imaging\Png\PngChunkType;
 
 /**
  * Reads metadata from any supported file format.
@@ -631,12 +633,60 @@ class ImageMetadataReader
             case 'Photoshop':
                 $directory = new PhotoshopDirectory();
                 break;
+            case 'PNG-IHDR':
+                $directory = new PngDirectory('IHDR');
+                break;
+            case 'PNG-PLTE':
+                $directory = new PngDirectory('PLTE');
+                break;
+            case 'PNG-IDAT':
+                $directory = new PngDirectory('IDAT');
+                break;
+            case 'PNG-IEND':
+                $directory = new PngDirectory('IEND');
+                break;
+            case 'PNG-cHRM':
+                $directory = new PngDirectory('cHRM');
+                break;
+            case 'PNG-gAMA':
+                $directory = new PngDirectory('gAMA');
+                break;
+            case 'PNG-iCCP':
+                $directory = new PngDirectory('iCCP');
+                break;
+            case 'PNG-sBIT':
+                $directory = new PngDirectory('sBIT');
+                break;
+            case 'PNG-sRGB':
+                $directory = new PngDirectory('sRGB');
+                break;
+            case 'PNG-bKGD':
+                $directory = new PngDirectory('bKGD');
+                break;
+            case 'PNG-hIST':
+                $directory = new PngDirectory('hIST');
+                break;
+            case 'PNG-tRNS':
+                $directory = new PngDirectory('tRNS');
+                break;
+            case 'PNG-pHYs':
+                $directory = new PngDirectory('pHYs');
+                break;
+            case 'PNG-sPLT':
+                $directory = new PngDirectory('sPLT');
+                break;
+            case 'PNG-tIME':
+                $directory = new PngDirectory('tIME');
+                break;
+            case 'PNG-iTXt':
+                $directory = new PngDirectory('iTXt');
+                break;
             case 'XMP':
                 $directory = new XmpDirectory();
                 break;
             default:
                 // TODO: To be enabled in testing
-                // throw new \RuntimeException('Unknown directory name \'' . $directoryName . '\' !');
+                throw new \RuntimeException('Unknown directory name \'' . $directoryName . '\' !');
         }
 
         return $directory;
