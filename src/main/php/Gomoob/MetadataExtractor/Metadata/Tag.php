@@ -62,7 +62,7 @@ class Tag
      */
     public function getTagName()
     {
-        return $this->_directory.getTagName($this->tagType);
+        return $this->directory.getTagName($this->tagType);
     }
     
     /**

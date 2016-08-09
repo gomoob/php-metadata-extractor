@@ -74,6 +74,41 @@ abstract class Directory
     }
     
     /**
+     * Returns the object hashed for the particular tag type specified, if available.
+     *
+     * @param tagType the tag type identifier
+     * @return the tag's value as an Object if available, else <code>null</code>
+     */
+    public function getObject($tagType)
+    {
+        return $this->tagMap[intval($tagType)];
+    }
+    
+    /**
+     * Returns the specified tag's value as a Rational.  If the value is unset or cannot be converted,
+     * <code>null</code> is returned.
+     */
+    public function getRational($tagType)
+    {
+        $o = $this->getObject($tagType);
+    
+        if ($o == null) {
+            return null;
+        }
+    
+        if ($o instanceof Rational) {
+            return $o;
+        }
+                
+        if (is_int($o)) {
+            return new Rational($o, 1);
+        }
+        
+        // NOTE not doing conversions for real number types
+        return null;
+    }
+    
+    /**
      * Returns the number of tags set in this Directory.
      *
      * @return int the number of tags set in this Directory
@@ -94,7 +129,7 @@ abstract class Directory
     {
         $nameMap = $this->getTagNameMap();
 
-        if (array_key_exists($tagType, $nameMap)) {
+        if (!array_key_exists($tagType, $nameMap)) {
             $hex = dechex($tagType);
             
             while (strlen($hex) < 4) {

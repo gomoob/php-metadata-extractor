@@ -177,13 +177,13 @@ class ImageMetadataReader
                 case 'X Resolution':
                     $directory->setRational(
                         ExifIFD0Directory::TAG_X_RESOLUTION,
-                        new Rational(static::parseDotsString($nameAndDescription[1]), 1)
+                        new Rational(intval(static::parseDotsString($nameAndDescription[1])), 1)
                     );
                     break;
                 case 'Y Resolution':
                     $directory->setRational(
                         ExifIFD0Directory::TAG_X_RESOLUTION,
-                        new Rational(static::parseDotsString($nameAndDescription[1]), 1)
+                        new Rational(intval(static::parseDotsString($nameAndDescription[1])), 1)
                     );
                     break;
                 case 'Planar Configuration':

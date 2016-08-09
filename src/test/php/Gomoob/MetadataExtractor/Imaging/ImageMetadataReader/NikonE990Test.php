@@ -29,9 +29,10 @@ class NikonE990Test extends TestCase
         $directory = $metadata->getDirectories()[1];
         $this->assertInstanceOf(ExifIFD0Directory::class, $directory);
         
-        $tag = $directory->getTagName(ExifIFD0Directory::TAG_X_RESOLUTION);
-        var_dump($tag);
-        
+        $rational = $directory->getRational(ExifIFD0Directory::TAG_X_RESOLUTION);
+        $this->assertSame(300, $rational->getNumerator());
+        $this->assertSame(1, $rational->getDenominator());
+
         // TODO: Continue testing
     }
 }
