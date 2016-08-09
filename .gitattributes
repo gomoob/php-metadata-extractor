@@ -25,10 +25,10 @@
 *.appd binary
 *.appe binary
 *.bmp binary
-*.bytes
-*.com
+*.bytes binary
+*.com binary
 *.gif binary
 *.png binary
-*.jar
+*.jar binary
 *.jpg binary
 *.psd binary
