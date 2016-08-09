@@ -92,7 +92,8 @@ class ImageMetadataReader
                 
                 // Otherwise create and configure a new directory
                 if (!$directory) {
-                    var_dump($directoryName);
+                    
+                	// var_dump($directoryName);
                     
                     $directory = static::createDirectoryWithName($directoryName);
                     
@@ -182,7 +183,7 @@ class ImageMetadataReader
                     break;
                 case 'Y Resolution':
                     $directory->setRational(
-                        ExifIFD0Directory::TAG_X_RESOLUTION,
+                        ExifIFD0Directory::TAG_Y_RESOLUTION,
                         new Rational(intval(static::parseDotsString($nameAndDescription[1])), 1)
                     );
                     break;
