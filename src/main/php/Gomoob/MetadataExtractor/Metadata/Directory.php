@@ -95,7 +95,12 @@ abstract class Directory
         $nameMap = $this->getTagNameMap();
 
         if (array_key_exists($tagType, $nameMap)) {
-            $hex = dechex(tagType, 4);
+            $hex = dechex($tagType);
+            
+            while (strlen($hex) < 4) {
+                $hex = '0' . $hex;
+            }
+            
             return 'Unknown tag (0x' . $hex . ')';
         }
 

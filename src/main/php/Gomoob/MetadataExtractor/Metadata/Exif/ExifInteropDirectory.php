@@ -15,8 +15,6 @@ namespace Gomoob\MetadataExtractor\Metadata\Exif;
  */
 class ExifInteropDirectory extends ExifDirectoryBase
 {
-    private static $tagNameMap = [];
-    
     public function __construct()
     {
         $this->setDescriptor(new ExifInteropDescriptor($this));

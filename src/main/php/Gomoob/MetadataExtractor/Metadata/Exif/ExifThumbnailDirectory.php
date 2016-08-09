@@ -30,9 +30,7 @@ class ExifThumbnailDirectory extends ExifDirectoryBase
      * @deprecated use {@link com.drew.metadata.exif.ExifDirectoryBase#TAG_COMPRESSION} instead.
      */
     const TAG_THUMBNAIL_COMPRESSION = 0x0103;
-    
-    private static $tagNameMap = [];
-    
+
     public function __construct()
     {
         $this->setDescriptor(new ExifThumbnailDescriptor($this));

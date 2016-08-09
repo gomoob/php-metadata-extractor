@@ -31,8 +31,6 @@ class ExifIFD0Directory extends ExifDirectoryBase
      */
     const TAG_GPS_INFO_OFFSET = 0x8825;
 
-    private static $tagNameMap = [];
-    
     public function __construct()
     {
         $this->setDescriptor(new ExifIFD0Descriptor($this));
