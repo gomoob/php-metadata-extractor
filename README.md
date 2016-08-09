@@ -11,15 +11,24 @@
 
 ## Introduction
 
+`php-metadata-extractor` is a wrapper used to call the powerful Java 
+[`metadata-extractor`](https://github.com/drewnoakes/metadata-extractor "metadata-extractor") library and have access to
+the same APIs in PHP.
+
+So here we'll provide the same documentation as `metadata-extractor` but for PHP, here is how to get metadata 
+with the library.
+
 ```php
 Metadata metadata = ImageMetadataReader.readMetadata(imagePath);
 ```
 
+## Installation
+
 ## About Gomoob
 
-At [Gomoob](https://www.gomoob.com) we build high quality software with awesome Open Source frameworks everyday. Would 
-you like to start your next project with us? That's great! Give us a call or send us an email and we will get back to 
-you as soon as possible !
+At [Gomoob](https://www.gomoob.com "Gomoob") we build high quality software with awesome Open Source frameworks 
+everyday. Would you like to start your next project with us? That's great! Give us a call or send us an email and we 
+will get back to you as soon as possible !
 
 You can contact us by email at [contact@gomoob.com](mailto:contact@gomoob.com) or by phone number 
 [(+33) 6 85 12 81 26](tel:+33685128126) or [(+33) 6 28 35 04 49](tel:+33685128126).

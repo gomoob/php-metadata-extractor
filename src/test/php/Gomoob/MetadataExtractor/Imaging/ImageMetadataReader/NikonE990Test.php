@@ -14,7 +14,7 @@ use Gomoob\MetadataExtractor\Metadata\Exif\ExifIFD0Directory;
  * Test case used to test the {@link ImageMetadataReader} class with the `Nikon E990.jpg` test file.
  *
  * @author Baptiste GAILLARD (baptiste.gaillard@gomoob.com)
- * @group NikonE990Test
+ * @group ImageMetadataReader.NikonE990Test
  */
 class NikonE990Test extends TestCase
 {

@@ -92,8 +92,7 @@ class ImageMetadataReader
                 
                 // Otherwise create and configure a new directory
                 if (!$directory) {
-                    
-                	// var_dump($directoryName);
+                    // var_dump($directoryName);
                     
                     $directory = static::createDirectoryWithName($directoryName);
                     
