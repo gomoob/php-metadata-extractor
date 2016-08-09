@@ -8,9 +8,6 @@ namespace Gomoob\BinaryDriver;
 use Monolog\Logger;
 
 use PHPUnit\Framework\TestCase;
-use Monolog\Handler\StreamHandler;
-use Alchemy\BinaryDriver\Exception\ExecutionFailureException;
-use Alchemy\BinaryDriver\Listeners\DebugListener;
 
 /**
  * Test case used to test the {@link JavaDriver} class.
@@ -77,7 +74,6 @@ class JavaDriverTest extends TestCase
         $this->assertContains('[Exif SubIFD] Focal Length = 51 mm', $output);
         $this->assertContains('[Exif SubIFD] Lens Model = EF-S17-55mm f/2.8 IS USM', $output);
         $this->assertContains('[File] File Name = elephant.jpg', $output);
-        $this->assertContains('[File] File Size = 830001 bytes', $output);
         
         // Under Windows the number of bytes computed is not the same as Unix
         $this->assertTrue(

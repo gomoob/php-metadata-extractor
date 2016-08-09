@@ -126,10 +126,6 @@ class ImageMetadataReader
         $nameAndDescription[1] = trim($nameAndDescription[1]);
         
         if ($directory instanceof ExifIFD0Directory) {
-            // var_dump($tagLine);
-            // var_dump($nameAndDescription[0]);
-            // var_dump($nameAndDescription[1]);
-            
             switch ($nameAndDescription[0]) {
                 case 'Interoperability Index':
                     break;
@@ -536,6 +532,10 @@ class ImageMetadataReader
                 default:
                     // TODO: Exception
             }
+        } elseif ($directory instanceof PngDirectory) {
+            // var_dump($tagLine);
+            // var_dump($nameAndDescription[0]);
+            // var_dump($nameAndDescription[1]);
         }
     }
     
