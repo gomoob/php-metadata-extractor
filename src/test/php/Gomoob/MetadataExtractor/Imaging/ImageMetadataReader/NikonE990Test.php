@@ -26,8 +26,9 @@ class NikonE990Test extends TestCase
         $metadata = ImageMetadataReader::readMetadata(realpath(TEST_RESOURCES_DIRECTORY . '/Nikon E990.jpg'));
         
         // Checks 'Exif IFD0' directory
-        $directory = $metadata->getDirectories()[0];
-
+        $directory = $metadata->getDirectories()[1];
+        $this->assertInstanceOf(ExifIFD0Directory::class, $directory);
+        
         $tag = $directory->getTagName(ExifIFD0Directory::TAG_X_RESOLUTION);
         var_dump($tag);
         

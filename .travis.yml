@@ -18,6 +18,7 @@ install:
   - composer install
 
 script:
+  - java -classpath '/home/travis/build/gomoob/php-metadata-extractor/src/main/resources/jars/*' com.drew.imaging.ImageMetadataReader '/home/travis/build/gomoob/php-metadata-extractor/src/test/resources/elephant.jpg'
   - grunt
 
 after_script:

@@ -129,7 +129,7 @@ class ImageMetadataReader
             // var_dump($nameAndDescription[0]);
             // var_dump($nameAndDescription[1]);
             
-            switch ($nameAndDescription[1]) {
+            switch ($nameAndDescription[0]) {
                 case 'Interoperability Index':
                     break;
                 case 'Interoperability Version':

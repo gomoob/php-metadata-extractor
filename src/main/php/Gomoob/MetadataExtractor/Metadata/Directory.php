@@ -9,6 +9,7 @@
 namespace Gomoob\MetadataExtractor\Metadata;
 
 use Gomoob\Java\Lang\NullPointerException;
+use Gomoob\MetadataExtractor\Lang\Rational;
 
 /**
  * Abstract base class for all directory implementations, having methods for getting and setting tag values of various
@@ -163,8 +164,19 @@ abstract class Directory
         if (!array_key_exists($tagType, $this->tagMap)) {
             $this->definedTagList[$tagType] = new Tag($tagType, $this);
         }
-
+        
         $this->tagMap[$tagType] = $value;
+    }
+    
+    /**
+     * Sets a <code>Rational</code> value for the specified tag.
+     *
+     * @param tagType  the tag's value as an int
+     * @param rational rational number
+     */
+    public function setRational($tagType, Rational $rational)
+    {
+        $this->setObject($tagType, $rational);
     }
     
     /**
