@@ -24,43 +24,19 @@ class JavaDriverTest extends TestCase
      */
     public function testCreate()
     {
-        $logger = new Logger('JavaDriver');
-        $logger->pushHandler(new StreamHandler('php://output'));
-        
-        $listener = new DebugListener();
-
         // Calls the method to be tested
-        $javaDriver = JavaDriver::create($logger);
-        $javaDriver->listen($listener);
-        
-        $javaDriver->on('debug', function ($line) {
-            echo $line;
-        });
-        
-        // TODO: To be deleted
-        $output = $javaDriver->command(['-version']);
-        var_dump($output);
+        $javaDriver = JavaDriver::create();
 
         // Makes a simple call to ensure it works
-        try {
-            $output = $javaDriver->command(
-                [
-                    '-classpath',
-                    str_replace('\\', '/', MAIN_RESOURCES_DIRECTORY . '/jars/*'),
-                    'com.drew.imaging.ImageMetadataReader',
-                    realpath(TEST_RESOURCES_DIRECTORY . '/elephant.jpg')
-                ]
-            );
-            
-            var_dump($output);
-        } catch (ExecutionFailureException $efex) {
-            $curEx = $efex;
-            
-            while ($curEx) {
-                var_dump($curEx->getMessage());
-                $curEx = $efex->getPrevious();
-            }
-        }
+        $output = $javaDriver->command(
+            [
+                '-classpath',
+                str_replace('\\', '/', MAIN_RESOURCES_DIRECTORY . '/jars/*'),
+                'com.drew.imaging.ImageMetadataReader',
+                realpath(TEST_RESOURCES_DIRECTORY . '/elephant.jpg')
+            ]
+        );
+
         $this->assertContains('[JPEG] Compression Type = Baseline', $output);
         $this->assertContains('[JPEG] Data Precision = 8 bits', $output);
         $this->assertContains('[JPEG] Image Height = 1280 pixels', $output);
@@ -88,10 +64,13 @@ class JavaDriverTest extends TestCase
         $this->assertContains('[Exif IFD0] Model = Canon EOS 70D', $output);
         $this->assertContains('[Exif IFD0] Exposure Time = 1/250 sec', $output);
         $this->assertContains('[Exif SubIFD] Exposure Time = 1/250 sec', $output);
+
+        // Under Windows and with French local floating numbers use ',' but under Unix its '.'
         $this->assertTrue(
             strstr($output, '[Exif SubIFD] F-Number = f/8,0') !== false  ||
             strstr($output, '[Exif SubIFD] F-Number = f/8.0') !== false
         );
+
         $this->assertContains('[Exif SubIFD] ISO Speed Ratings = null', $output);
         $this->assertContains('[Exif SubIFD] Date/Time Original = 2016:07:17 10:35:28', $output);
         $this->assertContains('[Exif SubIFD] Flash = null', $output);
@@ -99,6 +78,13 @@ class JavaDriverTest extends TestCase
         $this->assertContains('[Exif SubIFD] Lens Model = EF-S17-55mm f/2.8 IS USM', $output);
         $this->assertContains('[File] File Name = elephant.jpg', $output);
         $this->assertContains('[File] File Size = 830001 bytes', $output);
+        
+        // Under Windows the number of bytes computed is not the same as Unix
+        $this->assertTrue(
+            strstr($output, '[File] File Size = 829992 bytes') !== false  ||
+            strstr($output, '[File] File Size = 830001 bytes') !== false
+        );
+
         $this->assertContains('[File] File Modified Date = ', $output);
     }
 }

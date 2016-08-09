@@ -32,7 +32,6 @@ use Gomoob\MetadataExtractor\Metadata\Exif\Makernotes\CanonMakernoteDirectory;
 use Gomoob\MetadataExtractor\Metadata\Exif\GpsDirectory;
 use Gomoob\MetadataExtractor\Lang\Rational;
 use Gomoob\MetadataExtractor\Metadata\Png\PngDirectory;
-use Gomoob\MetadataExtractor\Imaging\Png\PngChunkType;
 
 /**
  * Reads metadata from any supported file format.
