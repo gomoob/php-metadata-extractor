@@ -46,8 +46,41 @@ of the Java `metadata-extractor`.
 Stable versions of `php-metadata-extrator` will be equal to `X.Y.Z-N` where `N` represents a patch number 
 associated to `php-metadata-extractor`. 
 
-Unstable or uncomplete versions of `php-metadata-extractor` will be equal to `X.Y.Z-alpha.N` or 
-`X.Y.Z-beta.N`. 
+Unstable or uncomplete versions of `php-metadata-extractor` will be equal to `X.Y.Z-alpha.N`,  
+`X.Y.Z-beta.N` or `X.Y.Z-rc.N`. 
+
+## Contribute
+
+### Rules
+
+The `metadata-extractor` Java library is very complete, so we need to improve its integration, if you would like 
+to contribute please respect the following rules : 
+
+* Create your pull requests only on the `develop` branch, the `master` branch should only be used by Gomoob to 
+  create new versions ; 
+* Use the `grunt phpcbf` command to automatically format your code with PHP Code Sniffer ; 
+* Use the `grunt phpcs` command to check your code before creating your Pull request ; 
+* Always try to fully document your classes, properties and functions. 
+
+### Builds
+
+The build scripts are managed with [Grunt]("Grunt"), to use is you first have to install [Node]("Node") and use the 
+`npm install`.
+
+The PHP dependencies are managed with [Composer]("Composer"), run the `composer update` command before calling any
+build command.
+
+Ensure you have a working Java environnement and that the `java` executable is available in your `PATH`.
+
+The following builds are available :
+
+* `grunt` clean temporary build files, run the PHPUnit unit tests and generated the PHPDocumentor documentation ;
+* `grunt phpcbf` automatically clean the source code for PHP Code Sniffer ; 
+* `grunt phpcs` check the validity of the source code with PHP Code Sniffer ; 
+* `grunt test` execute the PHPUnit unit tests ; 
+* `grunt generate-documentation` generate the PHPDocumentor documentation ; 
+* `grunt pdepend` generate the PDepend quality charts ; 
+* `grunt phpmd` generate the PHPMD code quality reports.
 
 ## About Gomoob
 
