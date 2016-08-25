@@ -16,7 +16,6 @@ use PHPUnit\Framework\TestCase;
  */
 class MetadataExtractorDriverTest extends TestCase
 {
-
     /**
      * Test method for `create($logger, $configuration)`.
      */

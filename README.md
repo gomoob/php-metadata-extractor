@@ -41,7 +41,7 @@ in your `PATH` variable.
 ## Versioning
 
 To easier version identification the version of `php-metadata-extractor` will always be aligned with the version
-of the Java `metadata-extractor`. 
+of the Java `metadata-extractor` library. 
 
 Stable versions of `php-metadata-extrator` will be equal to `X.Y.Z-N` where `N` represents a patch number 
 associated to `php-metadata-extractor`. 
@@ -82,11 +82,28 @@ The following builds are available :
 * `grunt pdepend` generate the PDepend quality charts ; 
 * `grunt phpmd` generate the PHPMD code quality reports.
 
+## Release history
+
+### 2.9.1-alpha.3 (2016-08-25)
+ * Add `\Gomoob\MetadataExtractor\Metadata\Bmp\BmpHeaderDescriptor` to begin management of BMP files ; 
+ * Add `\Gomoob\MetadataExtractor\Metadata\Bmp\BmpHeaderDirectory` to begin management of BMP files ; 
+ * Update composer dependencies and improve composer configuration.
+
+### 2.9.1-alpha.2 (2016-08-10)
+ * Implement the `\Gomoob\MetadataExtractor\Metadata\Directory#containsTag($tagType)` method ;
+ * Fix unit tests on Travis ;
+ * Add contribution instructions in the README file.
+
+### 2.9.1-alpha.1 (2016-08-09)
+ * Initial version.
+
 ## About Gomoob
 
-At [Gomoob](https://www.gomoob.com "Gomoob") we build high quality software with awesome Open Source frameworks 
-everyday. Would you like to start your next project with us? That's great! Give us a call or send us an email and we 
-will get back to you as soon as possible !
+At [Gomoob](https://www.gomoob.com) we build high quality software with awesome Open Source frameworks everyday. Would 
+you like to start your next project with us? That's great! Give us a call or send us an email and we will get back to 
+you as soon as possible !
 
 You can contact us by email at [contact@gomoob.com](mailto:contact@gomoob.com) or by phone number 
 [(+33) 6 85 12 81 26](tel:+33685128126) or [(+33) 6 28 35 04 49](tel:+33685128126).
+
+Visit also http://gomoob.github.io to discover more Open Source softwares we develop.

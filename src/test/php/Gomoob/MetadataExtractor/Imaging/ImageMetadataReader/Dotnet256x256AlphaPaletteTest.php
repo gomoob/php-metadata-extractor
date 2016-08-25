@@ -13,7 +13,7 @@ use Gomoob\MetadataExtractor\Metadata\Png\PngDirectory;
 use Gomoob\MetadataExtractor\Metadata\File\FileMetadataDirectory;
 
 /**
- * Test case used to test the {@link ImageMetadataReader} class with the `Nikon E990.jpg` test file.
+ * Test case used to test the {@link ImageMetadataReader} class with the `dotnet-256x256-alpha-palette.png` test file.
  *
  * @author Baptiste GAILLARD (baptiste.gaillard@gomoob.com)
  * @group ImageMetadataReader.Dotnet256x256AlphaPaletteTest

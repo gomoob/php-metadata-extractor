@@ -10,10 +10,14 @@ namespace Gomoob\MetadataExtractor\Imaging;
 
 use Gomoob\BinaryDriver\MetadataExtractorDriver;
 
+use Gomoob\MetadataExtractor\Lang\Rational;
+
 use Gomoob\MetadataExtractor\Metadata\Metadata;
 
 use Gomoob\MetadataExtractor\Metadata\Directory;
+use Gomoob\MetadataExtractor\Metadata\Bmp\BmpHeaderDirectory;
 use Gomoob\MetadataExtractor\Metadata\File\FileMetadataDirectory;
+use Gomoob\MetadataExtractor\Metadata\Gif\GifHeaderDirectory;
 use Gomoob\MetadataExtractor\Metadata\Jpeg\JpegComponent;
 use Gomoob\MetadataExtractor\Metadata\Jpeg\JpegDirectory;
 use Gomoob\MetadataExtractor\Metadata\Jfif\JfifDirectory;
@@ -30,9 +34,7 @@ use Gomoob\MetadataExtractor\Metadata\Exif\Makernotes\NikonType1MakernoteDirecto
 use Gomoob\MetadataExtractor\Metadata\Exif\ExifInteropDirectory;
 use Gomoob\MetadataExtractor\Metadata\Exif\Makernotes\CanonMakernoteDirectory;
 use Gomoob\MetadataExtractor\Metadata\Exif\GpsDirectory;
-use Gomoob\MetadataExtractor\Lang\Rational;
 use Gomoob\MetadataExtractor\Metadata\Png\PngDirectory;
-use Gomoob\MetadataExtractor\Metadata\Gif\GifHeaderDirectory;
 
 /**
  * Reads metadata from any supported file format.
@@ -676,6 +678,9 @@ class ImageMetadataReader
         switch ($directoryName) {
             case 'Adobe JPEG':
                 $directory = new AdobeJpegDirectory();
+                break;
+            case 'BMP Header':
+                $directory = new BmpHeaderDirectory();
                 break;
             case 'Canon Makernote':
                 $directory = new CanonMakernoteDirectory();

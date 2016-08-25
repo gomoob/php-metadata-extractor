@@ -22,7 +22,7 @@ use Gomoob\MetadataExtractor\Metadata\Adobe\AdobeJpegDirectory;
 use Gomoob\MetadataExtractor\Metadata\File\FileMetadataDirectory;
 
 /**
- * Test case used to test the {@link ImageMetadataReader} class with the `Nikon E990.jpg` test file.
+ * Test case used to test the {@link ImageMetadataReader} class with the `FujiFilm FinePixS1Pro.jpg` test file.
  *
  * @author Baptiste GAILLARD (baptiste.gaillard@gomoob.com)
  * @group ImageMetadataReader.FujiFilmFinePixS1ProTest
