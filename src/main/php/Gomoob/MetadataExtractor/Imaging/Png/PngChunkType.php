@@ -2,11 +2,13 @@
 
 /**
  * gomoob/php-metadata-extractor
-*
-* @copyright Copyright (c) 2016, GOMOOB SARL (http://gomoob.com)
-* @license   http://www.opensource.org/licenses/mit-license.php MIT (see the LICENSE.md file)
-*/
+ *
+ * @copyright Copyright (c) 2016, GOMOOB SARL (http://gomoob.com)
+ * @license   http://www.opensource.org/licenses/mit-license.php MIT (see the LICENSE.md file)
+ */
 namespace Gomoob\MetadataExtractor\Imaging\Png;
+
+use Gomoob\Java\Io\UnsupportedEncodingException;
 
 use Gomoob\Java\Lang\IllegalArgumentException;
 
@@ -208,7 +210,7 @@ class PngChunkType
     }
 }
 
-/* FIXME: Will be fixed when static initializers will be added in PHP
+/* TODO: Will be fixed when static initializers will be added in PHP
  * 
  * ----------------------------------------------------------------------
  * FOUND 0 ERRORS AND 1 WARNING AFFECTING 1 LINE

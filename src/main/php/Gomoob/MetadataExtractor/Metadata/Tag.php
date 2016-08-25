@@ -38,8 +38,6 @@ class Tag
      */
     public function __constrct($tagType, Directory $directory)
     {
-        var_dump($tagType);
-        
         $this->tagType = $tagType;
         $this->directory = $directory;
     }

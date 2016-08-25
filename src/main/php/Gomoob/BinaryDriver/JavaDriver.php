@@ -50,7 +50,7 @@ class JavaDriver extends AbstractBinary
 
         try {
             return static::load($binaries, $logger, $configuration);
-        } catch (BinaryDriverExecutableNotFound $e) {
+        } catch (ExecutableNotFoundException $e) {
             throw new ExecutableNotFoundException('Unable to load java', $e->getCode(), $e);
         }
     }
