@@ -35,6 +35,7 @@ use Gomoob\MetadataExtractor\Metadata\Exif\ExifInteropDirectory;
 use Gomoob\MetadataExtractor\Metadata\Exif\Makernotes\CanonMakernoteDirectory;
 use Gomoob\MetadataExtractor\Metadata\Exif\GpsDirectory;
 use Gomoob\MetadataExtractor\Metadata\Png\PngDirectory;
+use Gomoob\MetadataExtractor\Metadata\Photoshop\DuckyDirectory;
 
 /**
  * Reads metadata from any supported file format.
@@ -684,6 +685,9 @@ class ImageMetadataReader
                 break;
             case 'Canon Makernote':
                 $directory = new CanonMakernoteDirectory();
+                break;
+            case 'Ducky':
+                $directory = new DuckyDirectory();
                 break;
             case 'Exif IFD0':
                 $directory = new ExifIFD0Directory();

@@ -2,14 +2,13 @@
 
 /**
  * Copyright 2016 SARL GOMOOB. All rights reserved.
-*/
+ */
 namespace Gomoob\MetadataExtractor\Imaging\ImageMetadataReader;
 
 use Gomoob\MetadataExtractor\Imaging\ImageMetadataReader;
 
 use PHPUnit\Framework\TestCase;
 
-use Gomoob\MetadataExtractor\Metadata\Exif\ExifIFD0Directory;
 use Gomoob\MetadataExtractor\Metadata\Bmp\BmpHeaderDirectory;
 use Gomoob\MetadataExtractor\Metadata\File\FileMetadataDirectory;
 

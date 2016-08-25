@@ -84,6 +84,9 @@ The following builds are available :
 
 ## Release history
 
+### 2.9.1-alpha.4 (2016-08-25)
+ * Add `\Gomoob\MetadataExtractor\Metadata\Photoshop\DuckyDirectory` class.
+
 ### 2.9.1-alpha.3 (2016-08-25)
  * Add `\Gomoob\MetadataExtractor\Metadata\Bmp\BmpHeaderDescriptor` to begin management of BMP files ; 
  * Add `\Gomoob\MetadataExtractor\Metadata\Bmp\BmpHeaderDirectory` to begin management of BMP files ; 
